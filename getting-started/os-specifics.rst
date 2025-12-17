@@ -1,8 +1,6 @@
 Operating System Specifics
 ==========================
 
-.. tags:: beginner, developer, advanced
-
 This section contains instructions for working with different host operating systems.
 
 .. toctree::
