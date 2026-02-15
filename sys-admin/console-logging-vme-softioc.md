@@ -216,7 +216,7 @@ Finally, there are the lists of console instances. One line per each soft IOC or
 ```
 console ioc1    { include ts2; port  1; include tsc-def; aliases ts2-01; }
 console ioc2    { include ts2; port  2; include tsc-def; aliases ts2-02; }
-console ioc3    { include ts3; port  1; include tsc-def; aliases ts3-01; } 
+console ioc3    { include ts3; port  1; include tsc-def; aliases ts3-01; }
 ```
 
 ```

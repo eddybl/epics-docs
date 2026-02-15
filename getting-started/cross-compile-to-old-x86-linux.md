@@ -76,7 +76,7 @@ gcc (GCC) 4.2.4
 
 glibc version:
 
-``` console 
+``` console
 $ /lib/libc.so.6
 GNU C Library stable release version 2.7, by Roland McGrath et al.
 ```
@@ -95,26 +95,26 @@ $ ./ct-ng menuconfig
 
 PATHS AND MISC OPTIONS
    [*] Use obsolete features
-   
+
 TARGET OPTIONS
    Target architecture (x86)
    Bitness: (32-bit)
    (i686) Architecture Level
-   
+
 OPERATING SYSTEM
    Target OS (linux)
    Linux kernel version (2.6.27.55)
-   
+
 BINARY UTILITIES
    Binutils version (2.17)
-   
+
 C-COMPILER
    GCC version (4.2.4)
    [*] C++
-   
+
 C-LIBRARY
    glibc version (2.6.1)
-   
+
 ```
 
 I tried other configurations, but they crashed the compilation process.

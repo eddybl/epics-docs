@@ -3,10 +3,10 @@
 See {external+epics-base:doc}`errlog_h` for up-to-date API information.
 
 (err-log-overview)=
-## Overview 
+## Overview
 
-EPICS error logging system consists of functions for passing error messages and the [iocLog client and server](ioclog-chapter). 
-Error logging functions support generating messages with varying severity, registering and un-registering listeners 
+EPICS error logging system consists of functions for passing error messages and the [iocLog client and server](ioclog-chapter).
+Error logging functions support generating messages with varying severity, registering and un-registering listeners
 and modifying the log buffer size and max message size.
 
 Errors detected by an IOC can be divided into classes:
@@ -39,7 +39,7 @@ This chapter describes the following:
 
   - [errlogThread](#errlogthread) - A thread that passes the messages to all registered listeners.
 
-  - Messages can also be written to the console. 
+  - Messages can also be written to the console.
     [The storage for the message queue](#console-output-and-message-queue-size) can be specified by the user.
 
   - [status codes](#status-codes) - EPICS status codes.
@@ -61,7 +61,7 @@ They in turn call one of the error message routines.
 - {external+epics-base:cpp:func}`errlogMessage`
 - {external+epics-base:cpp:func}`errlogFlush`
 
-`errlogPrintf` and  `errlogVprintf` are like [`printf`](https://cplusplus.com/reference/cstdio/printf/) and 
+`errlogPrintf` and  `errlogVprintf` are like [`printf`](https://cplusplus.com/reference/cstdio/printf/) and
 [`vprintf`](https://cplusplus.com/reference/cstdio/vprintf) provided by the standard C library, except that their output is sent to the errlog task; unless configured not to, the output will appear on the console as well.
 Consult any book that describes the standard C library such as "The C Programming Language ANSI C Edition" by Kernighan and Ritchie.
 
@@ -93,7 +93,7 @@ If `epicsThreadIsOkToBlock` is true, which is true during iocInit, `errlogSevVpr
 - {external+epics-base:c:macro}`errMessage`
 - {external+epics-base:cpp:func}`errPrintf`
 
-Routine `errMessage` is actually a macro that calls `errPrintf` 
+Routine `errMessage` is actually a macro that calls `errPrintf`
 
 The calling routine is expected to pass a descriptive message to this routine.
 Many subsystems provide routines built on top of `errMessage` which generate descriptive messages.
@@ -163,7 +163,7 @@ eltc determines if errlog task writes message to the console.
 During error message storms this command can be used to suppress console messages.
 A argument of 0 suppresses the messages, any other value lets messages go to the console.
 
-`errlogInit` or `errlogInit2` can be used to initialize the error logging system 
+`errlogInit` or `errlogInit2` can be used to initialize the error logging system
 with a larger buffer and maximum message size.
 
 ## Status codes
@@ -261,7 +261,7 @@ Defaults for all of the above parameters are specified in  the files `$(EPICS_BA
 
 Client on the IOC that forwards log messages to the log server.
 
-Together with the program iocLogServer, a log client provides generic support for logging text messages from an IOC or other program to the log server host machine. 
+Together with the program iocLogServer, a log client provides generic support for logging text messages from an IOC or other program to the log server host machine.
 
 {external+epics-base:cpp:func}`logClientCreate`
 
@@ -290,7 +290,7 @@ One solution to this is to add a unique prefix to every log message.
 
 The {external+epics-base:cpp:func}`iocLogPrefix` command can be run from the startup file during IOC initialization to establish such a prefix that will be prepended to every log message when it is sent to the iocLogServer.
 
-For example, adding the following lines to your `st.cmd` file 
+For example, adding the following lines to your `st.cmd` file
 
 ```
 epicsEnvSet("IOC","sioc-b34-mc10");
@@ -299,9 +299,9 @@ iocLogPrefix("fac=LI21 proc=${IOC} ");
 
 will categorize all log messages from this IOC as belonging to the facility `LI21` and to the process `sioc-b34-mc10`.
 
-Note that log messages echoed to the IOC's standard output will not show the prefix, 
+Note that log messages echoed to the IOC's standard output will not show the prefix,
 it only appears in the version sent to the log server.
-`iocLogPrefix` should appear fairly early in the startup script so 
+`iocLogPrefix` should appear fairly early in the startup script so
 the IOC doesn't try to send any log messages without the prefix.
 Once the prefix has been set, it cannot be changed without rebooting the IOC.
 One can determine if a log prefix has been set using `logClientShow`.

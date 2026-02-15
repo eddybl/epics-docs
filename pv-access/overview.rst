@@ -8,12 +8,12 @@ There are (at the time of writing) two generations of pvAccess C++ implementatio
 PVXS
 ----
 
-PVXS <https://epics-base.github.io/pvxs/> is a re-implementation of the pvAccess protocol support. 
-This module provides a library (libpvxs.so or pvxs.dll) 
+PVXS <https://epics-base.github.io/pvxs/> is a re-implementation of the pvAccess protocol support.
+This module provides a library (libpvxs.so or pvxs.dll)
 and a set of CLI utilities acting as pvAccess protocol client and/or server.
 
-PVXS is functionally equivalent to the pvDataCPP and pvAccessCPP modules, 
-and is foreseen to eventually supplant those. 
+PVXS is functionally equivalent to the pvDataCPP and pvAccessCPP modules,
+and is foreseen to eventually supplant those.
 
 Inclusion in the EPICS release packages is foreseen from EPICS version 7.1.
 

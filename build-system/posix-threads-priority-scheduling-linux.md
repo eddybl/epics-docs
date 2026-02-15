@@ -3,12 +3,12 @@
 ## Introduction
 
 The Linux scheduler supports the SCHED_FIFO scheduling policy defined by POSIX.1-2001.
-Threads scheduled with this "real-time" policy can be assigned a priority (under Linux) in the range 1..99 with 99 representing the highest priority. 
-Since ordinary, 
-"non-real time" processes execute at priority 0 ([nice(1)](https://linux.die.net/man/1/nice) modifies a "dynamic priority" 
+Threads scheduled with this "real-time" policy can be assigned a priority (under Linux) in the range 1..99 with 99 representing the highest priority.
+Since ordinary,
+"non-real time" processes execute at priority 0 ([nice(1)](https://linux.die.net/man/1/nice) modifies a "dynamic priority"
 which only affects processes with real-time priority 0
 and implements fair timesharing among such processes) SCHED_FIFO threads are always capable to preempt "ordinary processes" (these use the policy SCHED_OTHER).
-Note, however, that unless the Linux kernel is built with the RT_PREEMPT patch 
+Note, however, that unless the Linux kernel is built with the RT_PREEMPT patch
 and measures are taken to lock the EPICS process in memory etc., no strictly deterministic latencies can be expected even under the SCHED_FIFO policy which thus is to be considered _soft-real time_.
 
 ## Configuring How can I let epicsThreads use the SCHED_FIFO Policy?
@@ -20,20 +20,20 @@ In order to let EPICS use the SCHED_FIFO real-time policy you first need to chec
 USE_POSIX_THREAD_PRIORITY_SCHEDULING = YES
 ```
 
-If you find that the current setting is "NO" 
-then you need to rebuild EPICS base (`make clean uninstall; make`) after changing to "YES". 
-Since engaging the SCHED_FIFO policy gives any thread created under that policy a higher priority than any normal process, 
-using SCHED_FIFO requires special privileges. 
+If you find that the current setting is "NO"
+then you need to rebuild EPICS base (`make clean uninstall; make`) after changing to "YES".
+Since engaging the SCHED_FIFO policy gives any thread created under that policy a higher priority than any normal process,
+using SCHED_FIFO requires special privileges.
 Under a reasonably recent Linux equipped with the pam_security module
-or systemd it is not necessary to execute EPICS IOCs as root. 
+or systemd it is not necessary to execute EPICS IOCs as root.
 Depending on your Linux system granting an IOC process running as a non-root user the required permissions requires some configuration, though.
 
 ### SysV-style Init System, or user-mode systemd
 
 On Linux systems using the traditional init system,
 the system administrator can define the maximum priority that may be used by specific users and/or groups in a file under `/etc/security/limits.d/`,
-see the [manpage for `limits.conf(5)`](https://linux.die.net/man/5/limits.conf). 
-E.g., if a file `/etc/security.limits.d/epics.conf` is created with the following contents (it may be necessary for a user to log out 
+see the [manpage for `limits.conf(5)`](https://linux.die.net/man/5/limits.conf).
+E.g., if a file `/etc/security.limits.d/epics.conf` is created with the following contents (it may be necessary for a user to log out
 and log back on in order to obtain the new privileges):
 
 ``` bash
@@ -44,7 +44,7 @@ someuser soft memlock  0
 ```
 
 then processes created by "_someuser_" still have priority and memlock limts of 0 by default (this is the "soft" value) but "_someuser_" may increase the rtprio limit up to 99 either from a running program (using the system call [setrlimit(2)](https://linux.die.net/man/2/setrlimit))
-or within a shell e.g., with Bash's `ulimit -r` utility. 
+or within a shell e.g., with Bash's `ulimit -r` utility.
 Note that a user process can set and/or lower its hard limit but _never increase_ it. RTM.
 
 If you are starting IOCs using user-mode systemd (i.e. with `systemctl --user` commands) you will also need the above settings
@@ -103,7 +103,7 @@ You need to do three things:
 1.  Build EPICS base with `USE_POSIX_THREAD_PRIORITY_SCHEDULING=YES`
 2.  Make sure your EPICS application process has sufficient privileges to use SCHED_FIFO and the desired priority range.
 3.  _SysV Init only:_ Set the soft and hard RTPRIO limits for your EPICS application process to enable it to actually make use of the privilege.
-This step is required because it is usually a bad idea to run _all_ processes created by a given user or group at real-time priorities.  
+This step is required because it is usually a bad idea to run _all_ processes created by a given user or group at real-time priorities.
     _Systemd only:_ Set the permissions for RTPRIO and MEMLOCK in the `[Service]` section of your IOC service configuration.
 
 ## Verify that Real-Time Scheduling has been enabled correctly

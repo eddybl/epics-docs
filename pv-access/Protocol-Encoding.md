@@ -40,7 +40,7 @@ values MUST always be a non-negative integer and encoded as follows:
 
 The basic types MUST be encoded as shown in the Table 1. Signed integer
 types (byte, short, int, long) MUST be represented as two’s complement
-numbers. Floating point types (float, double) MUST use the 
+numbers. Floating point types (float, double) MUST use the
 [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) standard formats.
 
 :::{table} Encoding for basic types
@@ -170,11 +170,11 @@ The above would be serialized as illustrated below (when using
 big-endian byte order, *valueUnion* selector with value 1 is selected):
 
     Hexdump [Serialized structure] size = 85
-    03 01 02 03  05 04 05 06  07 08 09 0A  0B 0C 11 22  .... .... .... ..." 
-    33 44 55 66  77 88 AA BB  CC DD EE EE  EE EE 11 11  3DUf w... .... .... 
-    11 11 22 22  22 22 0B 41  6C 6C 6F 2C  20 41 6C 6C  .."" "".A llo,  All 
-    6F 21 01 33  33 33 33 60  1C 53 74 72  69 6E 67 20  o!.3 333` .Str ing  
-    69 6E 73 69  64 65 20 76  61 72 69 61  6E 74 20 75  insi de v aria nt u 
+    03 01 02 03  05 04 05 06  07 08 09 0A  0B 0C 11 22  .... .... .... ..."
+    33 44 55 66  77 88 AA BB  CC DD EE EE  EE EE 11 11  3DUf w... .... ....
+    11 11 22 22  22 22 0B 41  6C 6C 6F 2C  20 41 6C 6C  .."" "".A llo,  All
+    6F 21 01 33  33 33 33 60  1C 53 74 72  69 6E 67 20  o!.3 333` .Str ing
+    69 6E 73 69  64 65 20 76  61 72 69 61  6E 74 20 75  insi de v aria nt u
     6E 69 6F 6E  2E                                     nion .
 
 ## Meta Data
@@ -194,57 +194,57 @@ Examples of BitSet serialization:
 
     Hexdump [{}] size = 1
     00                                                 .
-    
+
     Hexdump [{0}] size = 2
     01 01                                              ..
-    
+
     Hexdump [{1}] size = 2
     01 02                                              ..
-    
+
     Hexdump [{7}] size = 2
     01 80                                              ..
-    
+
     Hexdump [{8}] size = 3
     02 00 01                                           ...
-    
+
     Hexdump [{15}] size = 3
     02 00 80                                           ...
-    
+
     Hexdump [{55}] size = 8
-    07 00 00 00  00 00 00 80                            .... .... 
-    
+    07 00 00 00  00 00 00 80                            .... ....
+
     Hexdump [{56}] size = 9
     08 00 00 00  00 00 00 00  01                       .... .... .
-    
+
     Hexdump [{63}] size = 9
     08 00 00 00  00 00 00 00  80                       .... .... .
-    
+
     Hexdump [{64}] size = 10
     09 00 00 00  00 00 00 00  00 01                    .... .... ..
-    
+
     Hexdump [{65}] size = 10
     09 00 00 00  00 00 00 00  00 02                    .... .... ..
-    
+
     Hexdump [{0, 1, 2, 4}] size = 2
     01 17                                              ..
-    
+
     Hexdump [{0, 1, 2, 4, 8}] size = 3
     02 17 01                                           ...
-    
+
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50}] size = 8
-    07 00 01 02  03 04 05 06                            .... .... 
-    
+    07 00 01 02  03 04 05 06                            .... ....
+
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50, 56, 57, 58}] size = 9
     08 00 01 02  03 04 05 06  07                       .... .... .
-    
+
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50, 56, 57, 58, 67}] size = 10
     09 00 01 02  03 04 05 06  07 08                    .... .... ..
-    
+
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50, 56, 57, 58, 67, 72, 75}] size = 11
     0A 00 01 02  03 04 05 06  07 08 09                 .... .... ...
-    
+
     Hexdump [{8, 17, 24, 25, 34, 40, 42, 49, 50, 56, 57, 58, 67, 72, 75, 81, 83}] size = 12
-    0B 00 01 02  03 04 05 06  07 08 09 0A               .... .... .... 
+    0B 00 01 02  03 04 05 06  07 08 09 0A               .... .... ....
 
 #### Partial Structure Serialization
 
@@ -260,27 +260,27 @@ This example shows how bits of a BitSet are assigned to the fields of a
 structure:
 
     bit#    field
-    0    structure 
+    0    structure
     1        structure timeStamp
-    2            long secondsPastEpoch 
-    3            int nanoSeconds 
+    2            long secondsPastEpoch
+    3            int nanoSeconds
     4            int userTag
-    5        structure[] value 
+    5        structure[] value
                 structure org.epics.ioc.test.testStructure
-                    double value 
+                    double value
                     structure location
                         double x
                         double y
                 structure org.epics.ioc.test.testStructure
-                    double value 
+                    double value
                     structure location
                         double x
-                        double y 
+                        double y
     6        string factoryRPC
     7        structure arguments
     8            int size
 
-The structure above requires a BitSet that contains 9 bits.  
+The structure above requires a BitSet that contains 9 bits.
 If the bit corresponding to a structure node is set, then all the fields
 of that node MUST be serialized.
 
@@ -310,28 +310,28 @@ Examples of Status serialization:
 
     Hexdump [Status OK] size = 1
     FF                                                 .
-    
+
     Hexdump [WARNING, "Low memory", ""] size = 13
     01 0A 4C 6F  77 20 6D 65  6D 6F 72 79  00          ..Lo w me mory .
-    
+
     Hexdump [ERROR, "Failed to get, due to unexpected exception", (call tree)] size = 264
-    02 2A 46 61  69 6C 65 64  20 74 6F 20  67 65 74 2C  .*Fa iled  to  get, 
-    20 64 75 65  20 74 6F 20  75 6E 65 78  70 65 63 74   due  to  unex pect 
-    65 64 20 65  78 63 65 70  74 69 6F 6E  DB 6A 61 76  ed e xcep tion .jav 
-    61 2E 6C 61  6E 67 2E 52  75 6E 74 69  6D 65 45 78  a.la ng.R unti meEx 
-    63 65 70 74  69 6F 6E 0A  09 61 74 20  6F 72 67 2E  cept ion. .at  org. 
-    65 70 69 63  73 2E 63 61  2E 63 6C 69  65 6E 74 2E  epic s.ca .cli ent. 
-    65 78 61 6D  70 6C 65 2E  53 65 72 69  61 6C 69 7A  exam ple. Seri aliz 
-    61 74 69 6F  6E 45 78 61  6D 70 6C 65  73 2E 73 74  atio nExa mple s.st 
-    61 74 75 73  45 78 61 6D  70 6C 65 73  28 53 65 72  atus Exam ples (Ser 
-    69 61 6C 69  7A 61 74 69  6F 6E 45 78  61 6D 70 6C  iali zati onEx ampl 
-    65 73 2E 6A  61 76 61 3A  31 31 38 29  0A 09 61 74  es.j ava: 118) ..at 
-    20 6F 72 67  2E 65 70 69  63 73 2E 63  61 2E 63 6C   org .epi cs.c a.cl 
-    69 65 6E 74  2E 65 78 61  6D 70 6C 65  2E 53 65 72  ient .exa mple .Ser 
-    69 61 6C 69  7A 61 74 69  6F 6E 45 78  61 6D 70 6C  iali zati onEx ampl 
-    65 73 2E 6D  61 69 6E 28  53 65 72 69  61 6C 69 7A  es.m ain( Seri aliz 
-    61 74 69 6F  6E 45 78 61  6D 70 6C 65  73 2E 6A 61  atio nExa mple s.ja 
-    76 61 3A 31  32 36 29 0A                            va:1 26). 
+    02 2A 46 61  69 6C 65 64  20 74 6F 20  67 65 74 2C  .*Fa iled  to  get,
+    20 64 75 65  20 74 6F 20  75 6E 65 78  70 65 63 74   due  to  unex pect
+    65 64 20 65  78 63 65 70  74 69 6F 6E  DB 6A 61 76  ed e xcep tion .jav
+    61 2E 6C 61  6E 67 2E 52  75 6E 74 69  6D 65 45 78  a.la ng.R unti meEx
+    63 65 70 74  69 6F 6E 0A  09 61 74 20  6F 72 67 2E  cept ion. .at  org.
+    65 70 69 63  73 2E 63 61  2E 63 6C 69  65 6E 74 2E  epic s.ca .cli ent.
+    65 78 61 6D  70 6C 65 2E  53 65 72 69  61 6C 69 7A  exam ple. Seri aliz
+    61 74 69 6F  6E 45 78 61  6D 70 6C 65  73 2E 73 74  atio nExa mple s.st
+    61 74 75 73  45 78 61 6D  70 6C 65 73  28 53 65 72  atus Exam ples (Ser
+    69 61 6C 69  7A 61 74 69  6F 6E 45 78  61 6D 70 6C  iali zati onEx ampl
+    65 73 2E 6A  61 76 61 3A  31 31 38 29  0A 09 61 74  es.j ava: 118) ..at
+    20 6F 72 67  2E 65 70 69  63 73 2E 63  61 2E 63 6C   org .epi cs.c a.cl
+    69 65 6E 74  2E 65 78 61  6D 70 6C 65  2E 53 65 72  ient .exa mple .Ser
+    69 61 6C 69  7A 61 74 69  6F 6E 45 78  61 6D 70 6C  iali zati onEx ampl
+    65 73 2E 6D  61 69 6E 28  53 65 72 69  61 6C 69 7A  es.m ain( Seri aliz
+    61 74 69 6F  6E 45 78 61  6D 70 6C 65  73 2E 6A 61  atio nExa mple s.ja
+    76 61 3A 31  32 36 29 0A                            va:1 26).
 
 ### Introspection Data
 
@@ -372,7 +372,7 @@ negotiated when each connection is established.
 | 0xFD + ID + FieldDesc      | FULL_WITH_ID_TYPE_CODE   | Serialization contains an ID (that can be used later, if cached) and full interface description. Any existing definition with the same ID is overriden.
 |0xFC + ID + tag + FieldDesc | FULL_TAGGED_ID_TYPE_CODE | Serialization contains an ID (that can be used later, if cached), tag (of integer type) and full interface description. Any existing definition with the same ID is overriden. A tag must guarantee that the same (ID, FieldDesc) pair has the same tag and any previous definition with the same ID and different FieldDesc has a different tag. This identifies whether the definition with given ID overrides already existing one and allow receivers to skip deserialization of FieldDesc, if tags match. SHOULD be used in non-reliable transport systems only.
 | 0xFB - 0xE0                | RESERVED                 | Reserved for future usage, MUST NOT be used. |
-| FieldDesc (0xDF - 0x00)    | FULL_TYPE_CODE           | Serialization contains only full interface description. 
+| FieldDesc (0xDF - 0x00)    | FULL_TYPE_CODE           | Serialization contains only full interface description.
 :::
 
 Each instance of a Field introspection description (FieldDesc) MUST be
@@ -436,7 +436,7 @@ encoding, e.g. to select a 'short' or 'long' integer.
 | 2-0 |  011   | bounded string |
 | 2-0 |  010   | variant union  |
 | 2-0 |  001   | union |
-| 2-0 |  000   | structure | 
+| 2-0 |  000   | structure |
 :::
 
 For all other types, bits 2-0 MUST be '0b000'.
@@ -480,9 +480,9 @@ The introspection description of the above structure is be encoded by
 pvAccess as the following:
 
     Hexdump [Serialized structure IF] size = 57
-    FD 00 01 80  0B 74 69 6D  65 53 74 61  6D 70 5F 74  .... .tim eSta mp_t 
-    03 10 73 65  63 6F 6E 64  73 50 61 73  74 45 70 6F  ..se cond sPas tEpo 
-    63 68 23 0B  6E 61 6E 6F  53 65 63 6F  6E 64 73 22  ch#. nano Seco nds" 
+    FD 00 01 80  0B 74 69 6D  65 53 74 61  6D 70 5F 74  .... .tim eSta mp_t
+    03 10 73 65  63 6F 6E 64  73 50 61 73  74 45 70 6F  ..se cond sPas tEpo
+    63 68 23 0B  6E 61 6E 6F  53 65 63 6F  6E 64 73 22  ch#. nano Seco nds"
     07 75 73 65  72 54 61 67  22                        .use rTag "
 
 #### Example \#2
@@ -512,19 +512,19 @@ The introspection description of the above structure would be encoded by
 pvAccess as the following:
 
     Hexdump [Serialized structure IF] size = 243
-    FD 00 01 80  10 65 78 61  6D 70 6C 65  53 74 72 75  .... .exa mple Stru 
-    63 74 75 72  65 07 05 76  61 6C 75 65  28 10 62 6F  ctur e..v alue (.bo 
-    75 6E 64 65  64 53 69 7A  65 41 72 72  61 79 30 10  unde dSiz eArr ay0. 
-    0E 66 69 78  65 64 53 69  7A 65 41 72  72 61 79 38  .fix edSi zeAr ray8 
-    04 09 74 69  6D 65 53 74  61 6D 70 FD  00 02 80 06  ..ti meSt amp. .... 
-    74 69 6D 65  5F 74 03 10  73 65 63 6F  6E 64 73 50  time _t.. seco ndsP 
-    61 73 74 45  70 6F 63 68  23 0B 6E 61  6E 6F 73 65  astE poch #.na nose 
-    63 6F 6E 64  73 22 07 75  73 65 72 54  61 67 22 05  cond s".u serT ag". 
-    61 6C 61 72  6D FD 00 03  80 07 61 6C  61 72 6D 5F  alar m... ..al arm_ 
-    74 03 08 73  65 76 65 72  69 74 79 22  06 73 74 61  t..s ever ity" .sta 
-    74 75 73 22  07 6D 65 73  73 61 67 65  60 0A 76 61  tus" .mes sage `.va 
-    6C 75 65 55  6E 69 6F 6E  FD 00 04 81  00 03 0B 73  lueU nion .... ...s 
-    74 72 69 6E  67 56 61 6C  75 65 60 08  69 6E 74 56  trin gVal ue`. intV 
-    61 6C 75 65  22 0B 64 6F  75 62 6C 65  56 61 6C 75  alue ".do uble Valu 
-    65 43 0C 76  61 72 69 61  6E 74 55 6E  69 6F 6E FD  eC.v aria ntUn ion. 
+    FD 00 01 80  10 65 78 61  6D 70 6C 65  53 74 72 75  .... .exa mple Stru
+    63 74 75 72  65 07 05 76  61 6C 75 65  28 10 62 6F  ctur e..v alue (.bo
+    75 6E 64 65  64 53 69 7A  65 41 72 72  61 79 30 10  unde dSiz eArr ay0.
+    0E 66 69 78  65 64 53 69  7A 65 41 72  72 61 79 38  .fix edSi zeAr ray8
+    04 09 74 69  6D 65 53 74  61 6D 70 FD  00 02 80 06  ..ti meSt amp. ....
+    74 69 6D 65  5F 74 03 10  73 65 63 6F  6E 64 73 50  time _t.. seco ndsP
+    61 73 74 45  70 6F 63 68  23 0B 6E 61  6E 6F 73 65  astE poch #.na nose
+    63 6F 6E 64  73 22 07 75  73 65 72 54  61 67 22 05  cond s".u serT ag".
+    61 6C 61 72  6D FD 00 03  80 07 61 6C  61 72 6D 5F  alar m... ..al arm_
+    74 03 08 73  65 76 65 72  69 74 79 22  06 73 74 61  t..s ever ity" .sta
+    74 75 73 22  07 6D 65 73  73 61 67 65  60 0A 76 61  tus" .mes sage `.va
+    6C 75 65 55  6E 69 6F 6E  FD 00 04 81  00 03 0B 73  lueU nion .... ...s
+    74 72 69 6E  67 56 61 6C  75 65 60 08  69 6E 74 56  trin gVal ue`. intV
+    61 6C 75 65  22 0B 64 6F  75 62 6C 65  56 61 6C 75  alue ".do uble Valu
+    65 43 0C 76  61 72 69 61  6E 74 55 6E  69 6F 6E FD  eC.v aria ntUn ion.
     00 05 82                                            ...

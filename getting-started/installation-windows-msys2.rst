@@ -252,7 +252,7 @@ Change into the testioc folder and run ``make``::
 This should create all the files for the test IOC.
 
 ::
-    
+
     $ ls
     bin  configure  db  dbd  iocBoot  lib  Makefile  testApp
 
@@ -268,12 +268,12 @@ At this point, you can run the IOC from either an MSYS2 Bash shell or from a Win
 
 In the Windows command prompt::
 
-    >cd C:\msys64\home\'user'\testioc\iocBoot\ioctest    
+    >cd C:\msys64\home\'user'\testioc\iocBoot\ioctest
     >..\..\bin\windows-x64-mingw\test st.cmd
 
 In the MSYS2 shell::
 
-    $ cd ~/testioc/iocBoot/ioctest    
+    $ cd ~/testioc/iocBoot/ioctest
     $ ../../bin/windows-x64-mingw/test st.cmd
 
 

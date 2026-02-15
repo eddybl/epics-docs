@@ -1,7 +1,7 @@
 Channel Access Protocol Specification
 =====================================
 
-.. tags:: advanced 
+.. tags:: advanced
 
 Table of Contents
 

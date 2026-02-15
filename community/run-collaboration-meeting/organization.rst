@@ -12,7 +12,7 @@ Providing large-screen TVs or projectors in the exhibition space allows EPICS-re
 
 Recent attendance has been between 80-130 people, but this depends on the number of users from the hosting site and nearby.
 It can be difficult for government-funded workers (especially from US Department of Energy labs) to get approval for travel to exotic locations though, so expect attendance to vary.
-Workshops can be around 30 people, but may vary depending on the topic. 
+Workshops can be around 30 people, but may vary depending on the topic.
 If someone wants to run a workshop you can ask them for estimates on numbers.
 
 To include some hands-on training you may may provide PCs capable of running a virtual machine for students to use, or ask them to bring their own laptops (which some will do anyway).

@@ -106,5 +106,5 @@ fi
 exit 0
 ```
 
-Enjoy!  
+Enjoy!
 Ralph

@@ -178,7 +178,7 @@ tags_create_badges = True
 
 tags_overview_title = "All tags"
 
-tags_extension = ["rst", "md"] 
+tags_extension = ["rst", "md"]
 
 tags_page_title = "Tags"
 

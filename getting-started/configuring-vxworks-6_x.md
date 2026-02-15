@@ -25,7 +25,7 @@ Using the Wind River Workbench to create a vxWorks image suitable for running EP
 *   Network Components (default)
     *   Network Applications (default)
         *   SNTP Components
-            *   SNTP Client (daemon) — INCLUDE\_IPSNTPC  
+            *   SNTP Client (daemon) — INCLUDE\_IPSNTPC
                 _Set the NTP server addresses under here. The primary server IPv4 address can be set to sysBootParams.had for the IOC to always use its boot host as an NTP server._
     *   Network Core Components (default)
         *   Backwards compatibility wrapper routines
@@ -36,11 +36,11 @@ Using the Wind River Workbench to create a vxWorks image suitable for running EP
     *   IO system components (default)
         *   IO Subsystem Components
             *   Basic IO System
-                *   max # open files in the system — NUM\_FILES  
+                *   max # open files in the system — NUM\_FILES
                     _Configure this to more than the maximum number of CA sessions you expect need to connect into and out of this IOC at the same time. The CA protocol uses one file handle per client, and every additional network socket, serial port and other vxWorks device will use at least one._
     *   kernel components (default)
         *   unix compatable environment variables (default)
-            *   install environment variable task create/delete hooks — ENV\_VAR\_USE\_HOOKS  
+            *   install environment variable task create/delete hooks — ENV\_VAR\_USE\_HOOKS
                 _This variable must be set to FALSE._
 
 The following components are **optional** but will often be wanted:
@@ -49,7 +49,7 @@ The following components are **optional** but will often be wanted:
     *   Network Applications (default)
         *   SNTP Components
             *   INCLUDE\_IPSNTP\_CMD
-        *   DNS Client — INCLUDE\_IPDNSC  
+        *   DNS Client — INCLUDE\_IPDNSC
             _Set the DNS domain name and at least the DNS primary name server under here. The server can be set to sysBootParams.had for the IOC to always use its boot host as a DNS server_
     *   Network Core Components (default)
         *   Backwards compatibility wrapper routines

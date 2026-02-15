@@ -46,7 +46,7 @@ changed in the `configure/CONFIG_SITE` file. The installation directory
 for the EPICS components is controlled by the definition of the
 `INSTALL_LOCATION` variable.
 
-Due to a side-effect of the build rules, the *parent* of the installation directory `($(INSTALL_LOCATION)/..)` 
+Due to a side-effect of the build rules, the *parent* of the installation directory `($(INSTALL_LOCATION)/..)`
 should not contain directories with the same names as the subdirectories listed below.
 
 
@@ -781,7 +781,7 @@ SRC_DIRS += ../dir1 ../dir2
 The directory search order for the above definition is
 
 ```
-. 
+.
 ../os/$(OS_CLASS) ../os/posix ../os/default ../dir1/os/$(OS_CLASS)
 ../dir1/os/posix ../dir1/os/default ../dir2/os/$(OS_CLASS)
 ../dir2/os/posix ../dir2/os/default .. ../dir1 ../dir2
@@ -1927,7 +1927,7 @@ object libraries have a Library.o suffix. It is possible to generate and
 install combined object libraries by using definitions:
 
 ```makefile
-OBJLIB += <name> 
+OBJLIB += <name>
 OBJLIB_vxWorks += <name>
 OBJLIB_SRCS += <srcname1> <srcname2> ...
 OBJLIB_OBJS += <objname1> <objname2> ...
@@ -2864,14 +2864,14 @@ being created from the specified `*.rc` resource definition script files and
 linked into the prods and/or libraries.
 
 ```
-RCS += <name> 
+RCS += <name>
 RCS_<osclass> += <name>
 ```
 
 Resource definition script files for all products and libraries.
 
 ```
-PROD_RCS += <name> 
+PROD_RCS += <name>
 PROD_RCS_<osclass> += <name>
 PROD_RCS_DEFAULT += <name>
 ```
@@ -2879,7 +2879,7 @@ PROD_RCS_DEFAULT += <name>
 Resource definition script files for all products.
 
 ```
-LIB_RCS += <name> 
+LIB_RCS += <name>
 LIB_RCS_<osclass> += <name>
 LIB_RCS_DEFAULT += <name>
 ```
@@ -2887,7 +2887,7 @@ LIB_RCS_DEFAULT += <name>
 Resource definition script files for all libraries.
 
 ```
-<name>_RCS += <name> 
+<name>_RCS += <name>
 <name>_RCS_<osclass> += <name>
 <name>_RCS_DEFAULT += <name>
 ```
@@ -3241,7 +3241,7 @@ be specified in the relevant Makefile definition.
 | PROD_HOST_\<osclass\>              | os class specific products to build and install for <osclass> type archs                     |
 | PROD_HOST_DEFAULT   | products to build and install for arch with no `PROD_HOST_<osclass>` specified                              |
 
-### Test products to be built 
+### Test products to be built
 
 | Build Option                     | Description                                                                                  |
 | ------------                     | -----------                                                                                  |
@@ -3255,7 +3255,7 @@ be specified in the relevant Makefile definition.
 | TESTPROD_HOST_\<osclass\>          | os class specific testproducts to build and install for `<osclass>` type archs              |
 | TESTPROD_HOST_DEFAULT            | test products to build and  install for arch with no `TESTPROD_HOST_<osclass>` specified       |
 
-### Test scripts to be built 
+### Test scripts to be built
 
 | Build Option                     | Description                                                                                  |
 | ------------                     | -----------                                                                                  |
@@ -3269,7 +3269,7 @@ be specified in the relevant Makefile definition.
 | TESTSCRIPTS_HOST_\<osclass\>       | os class specific testscripts to  build and install for  <osclass> type archs             |
 | TESTSCRIPTS_HOST_DEFAULT         | test scripts to build and install for arch with no `TESTSCRIPTS_HOST_<osclass>` specified  |
 
-### Libraries to be built 
+### Libraries to be built
 
 | Build Option                     | Description                                                                                  |
 | ------------                     | -----------                                                                                  |
@@ -3289,7 +3289,7 @@ be specified in the relevant Makefile definition.
 | SHRLIB_VERSION                   | shared library version number    |
 
 
-### Loadable libraries to be built 
+### Loadable libraries to be built
 
 | Build Option                     | Description                                                                                  |
 | ------------                     | -----------                                                                                  |
@@ -3300,7 +3300,7 @@ be specified in the relevant Makefile definition.
 | LOADABLE_LIBRARY_HOST            | name of loadable library to build and install for host type  archs. The name should NOT       |
 |                                  | include a prefix or extension, e.g. specify test to build libtest.so on Unix and test.dll on WIN32 |
 | LOADABLE_LIBRARY_HOST_\<osclass\> | os class specific loadable libraries to build and install for host type archs              |
-| LOADABLE_LIBRARY_HOST_DEFAULT    | loadable libraries to build and install for host type arch | 
+| LOADABLE_LIBRARY_HOST_DEFAULT    | loadable libraries to build and install for host type arch |
 |                                  | systems with no `LOADABLE_LIBRARY_HOST_<osclass>` specified |
 
 ### Combined object files (vxWorks only)
@@ -3335,7 +3335,7 @@ be specified in the relevant Makefile definition.
 | \<name\>_SRCS_\<osclass\>            | os specific source files to  build a specific PROD or LIBRARY |
 | \<name\>_SRCS_DEFAULT              | source files needed to build a specific PROD or LIBRARY for archs with no `<prod>_SRCS_<osclass>` specified |
 
-### Product and library object files 
+### Product and library object files
 
 | Build Option          | Description                                                                                  |
 | ------------          | -----------       |
@@ -3498,9 +3498,9 @@ be specified in the relevant Makefile definition.
 | TCLLIBNAME                       | list of tcl scripts to install into $(INSTALL_DIR)/lib/\<osclass\>  (Unix hosts only)                |
 | TCLINDEX                         | name of tcl index file to create from TCLLIBNAME scripts          |
 
-### Object files 
+### Object files
 
-The names in the following OBJS definitions should NOT include a suffix (.o or.obj). 
+The names in the following OBJS definitions should NOT include a suffix (.o or.obj).
 
 | Build Option          | Description                                                                                  |
 | ------------          | -----------       |
@@ -3534,7 +3534,7 @@ The names in the following OBJS definitions should NOT include a suffix (.o or.o
 | DBD_INSTALLS       | files from specified directory to install into $(INSTALL_DBD)   |
 |                    | (e.g. `DBD_INSTALLS = $(APPNAME)/dbd/test.dbd)`         |
 
-### Database Files 
+### Database Files
 
 | Build Option       | Description                                                                                  |
 | ------------       | -----------       |
@@ -3557,7 +3557,7 @@ The names in the following OBJS definitions should NOT include a suffix (.o or.o
 | USR_ARFLAGS        | ar options                       |
 
 
-### Facilities for building Java programs 
+### Facilities for building Java programs
 
 | Build Option       | Description                                                                                  |
 | ------------       | -----------       |
@@ -3582,7 +3582,7 @@ The names in the following OBJS definitions should NOT include a suffix (.o or.o
 
 ### Assemblies
 
- 
+
  | Build Option       | Description                                                                                  |
 | ------------        | -----------       |
 | ASSEMBLIES          | names of files to be assembled from snippets                    |
@@ -3621,7 +3621,7 @@ The base/configure directory has the following directory structure:
 ```
 base/
 ├──-configure/
-    ├── os/ 
+    ├── os/
     ├── tools/
 ```
 
@@ -3728,9 +3728,9 @@ in a file.
 Definitions and rules to allow user created `CONFIG*` and `RULES*` files
 and rules to allow user created file types.
 
-`RULES_JAVA` 
+`RULES_JAVA`
 
-Definitions and rules which allow building java class files and java jar files. 
+Definitions and rules which allow building java class files and java jar files.
 
 `RULES_TARGET`
 

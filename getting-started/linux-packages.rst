@@ -9,18 +9,18 @@ Overview
 --------
 This document describes the packages that must be installed
 in order to build EPICS base, synApps, and areaDetector
-on a new CentOS 8 system.  
+on a new CentOS 8 system.
 For other Linux distributions the package manager and package names
 may be different, but the requirements are likely to be similar.
 
 Add the Extra Packages for Enterprise Linux (EPEL) repository
-for the dnf package manager.  
+for the dnf package manager.
 This site has additional packages that are needed::
 
   sudo dnf install epel-release
 
 Enable the powertools repository by running::
-   
+
   sudo dnf config-manager --set-enabled powertools
 
 Or on CentOS 9 Stream by running::
