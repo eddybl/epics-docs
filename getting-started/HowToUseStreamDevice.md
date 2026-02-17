@@ -428,7 +428,7 @@ setLocRem {
 }
 ```
 
-This uses the StreamDevice ENUM converter to send one of two strings to the device based on the PV value. 
+This uses the StreamDevice ENUM converter to send one of two strings to the device based on the PV value.
 The corresponding addition to `HPE3631ASup/devHPE3631A.db` is:
 
 ```

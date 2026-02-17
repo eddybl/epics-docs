@@ -4,16 +4,16 @@ See {doc}`epics-base:devSup_h` for up-to-date API information.
 
 ##  Overview
 
-In addition to a record support module, each record type can have an arbitrary number of device support modules. The 
-purpose of device support is to hide hardware specific details from record processing routines. Thus support can be 
+In addition to a record support module, each record type can have an arbitrary number of device support modules. The
+purpose of device support is to hide hardware specific details from record processing routines. Thus support can be
 developed for a new device without changing the record support routines.
 
-A device support routine has knowledge of the record definition. It also knows how to talk to the hardware directly or how 
-to call a device driver which interfaces to the hardware. Thus device support routines are the interface between hardware 
+A device support routine has knowledge of the record definition. It also knows how to talk to the hardware directly or how
+to call a device driver which interfaces to the hardware. Thus device support routines are the interface between hardware
 specific fields in a database record and device drivers or the hardware itself.
 
-Release 3.14.8 introduced the concept of extended device support, which provides an optional interface that a device 
-support can implement to obtain notification when a record's address is changed at runtime. This permits records to be 
+Release 3.14.8 introduced the concept of extended device support, which provides an optional interface that a device
+support can implement to obtain notification when a record's address is changed at runtime. This permits records to be
 reconnected to a different kind of I/O device, or just to a different signal on the same device.
 Extended device support is described in more detail in section [Extended Device Support](#extended-device-support) below.
 
@@ -32,8 +32,8 @@ but older modules can be modified and new code written to be compatible with bot
 
 Since EPICS Base Release 7.0.4, record types in Base define their Device Support Entry Table (DSET)
 structures in the record header file. While this is still optional, developers of
-external support modules are encouraged to use the record's new definitions 
-instead of the traditional approach of copying the structure definitions into each source file 
+external support modules are encouraged to use the record's new definitions
+instead of the traditional approach of copying the structure definitions into each source file
 that needs them. By following the instructions below it is still possible for the converted code to build and
 work with older Base releases.
 
@@ -101,7 +101,7 @@ The above `typedef struct` declaration was copied directly from the new
 {doc}`epics-base:aiRecord_h` file and wrapped in the `#ifndef HAS_aidset` conditional.
 
 This same pattern should be followed for all record types except for the {doc}`lsi <epics-base:lsiRecord>`,
-{doc}`lso <epics-base:lsoRecord>` and {doc}`printf <epics-base:printfRecord>` record types, 
+{doc}`lso <epics-base:lsoRecord>` and {doc}`printf <epics-base:printfRecord>` record types,
 which have published their device support entry
 table structures since they were first added to Base but didn't previously embed
 the `dset common` member. Device support for these record types therefore can't
@@ -123,14 +123,14 @@ devLsiEtherIP = {
 };
 ```
 
-The field `DTYP` contains the index of the menu choice as defined by the device ASCII definitions. `iocInit` uses this 
-field and the device support structures defined in {doc}`epics-base:devSup_h` to initialize the field `DSET`. 
+The field `DTYP` contains the index of the menu choice as defined by the device ASCII definitions. `iocInit` uses this
+field and the device support structures defined in {doc}`epics-base:devSup_h` to initialize the field `DSET`.
 Thus record support can locate its associated device support via the `DSET` field.
 
 ## Synchronous vs. Asynchronous Device Support
 
-Device support modules can be divided into two basic classes: synchronous and asynchronous. Synchronous device 
-support is used for hardware that can be accessed without delays for I/O. Many register based devices are synchronous 
+Device support modules can be divided into two basic classes: synchronous and asynchronous. Synchronous device
+support is used for hardware that can be accessed without delays for I/O. Many register based devices are synchronous
 devices. Other devices, for example all devices accessed through a network or serial interface, can only be accessed
 via I/O requests that may take large amounts
 of time to complete. Such devices must have associated asynchronous device support. This changes the way that links between
@@ -283,7 +283,7 @@ static long read_ai(struct aiRecord *pai)
         pai->udf = FALSE; /* We modify VAL so we are responsible for UDF too. */
         printf("Completed asynchronous processing: %s\n",pai->name);
         return(2); /* don't convert*/
-    } 
+    }
     printf("Starting asynchronous processing: %s\n",pai->name);
     pai->pact=TRUE;
     callbackRequestDelayed(pcallback,pai->disv);
@@ -405,14 +405,14 @@ If a record is set to I/O Interrupt scan but the new device support does not sup
 
 ### Initialization/Registration
 
-Device support that implements the extended behaviour must provide an `init` routine in the Device Support Entry Table 
+Device support that implements the extended behaviour must provide an `init` routine in the Device Support Entry Table
 (see Section [Initialize Device Processing](#initialize-device-processing) ).
 In the first call to this routine (pass 0) it registers the address of its Device Support eXtension Table (DSXT) in a call to `devExtend`.
 
 The only exception to this registration requirement is when the device support uses a link type of `CONSTANT`.  In this
-circumstance the system will automatically register an empty DSXT for that particular support layer (both the 
-`add_record` and `del_record` routines pointed to by this DSXT do nothing and return zero). This exception allows 
-existing soft channel device support layers to continue to work without requiring any modification, since the iocCore 
+circumstance the system will automatically register an empty DSXT for that particular support layer (both the
+`add_record` and `del_record` routines pointed to by this DSXT do nothing and return zero). This exception allows
+existing soft channel device support layers to continue to work without requiring any modification, since the iocCore
 software already takes care of changes to PV\_LINK addresses.
 
 The following is an example of a DSXT and the initialization routine that registers it:
@@ -475,7 +475,7 @@ Set SHFT, convert SHFT to MASK
 Calculate ESLO and EOFF
 
 - Output record types:
-Possibly read the current value from hardware and back-convert to VAL, or send the current record output value to the hardware. 
+Possibly read the current value from hardware and back-convert to VAL, or send the current record output value to the hardware.
 *This behaviour is not required or defined, and it's not obvious what should be done. There may be complications here with
 ao records using `OROC` and/or `OIF=Incremental`; solutions to this issue have yet to be considered by the community.*
 
@@ -517,4 +517,3 @@ Calculate ESLO and EOFF
 
 - Output record types:
 Perform readback of the initial raw value from the hardware.
-

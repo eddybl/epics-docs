@@ -1,7 +1,7 @@
 EPICS Process Database Concepts
 ===============================
 
-.. tags:: beginner, user, developer 
+.. tags:: beginner, user, developer
 
 
 .. contents:: Table of Contents
@@ -1099,13 +1099,13 @@ If either LINEAR or SLOPE is chosen, the record performs a linear conversion on 
 data. If NO CONVERSION is chosen, the record performs no conversion on
 its data. The other choices are the names of breakpoint tables. When one
 of these is specified in the LINR field, the record uses the specified
-table to convert its data. 
+table to convert its data.
 
 .. note::
   Additional breakpoint tables are
   often added at specific sites, so more breakpoint tables than are listed
-  here may be available at the user's site. 
-  
+  here may be available at the user's site.
+
 The following sections explain linear and breakpoint conversions.
 
 
@@ -1719,7 +1719,7 @@ database changes. The VAL field is the exception. If the MDEL field is
 set, then the VAL field is sent when a monitor is set, and then only
 sent again, when the VAL field has changed by MDEL.
 
-.. note:: 
+.. note::
 
   A MDEL of 0 sends a monitor whenever the VAL fields changes and an MDEL of -1
   sends a monitor whenever the record is processed as the MDEL is applied

@@ -38,7 +38,7 @@ System.](http://epics-controls.org)
 
 The terms MUST, MUST NOT, SHOULD, SHOULD NOT, REQUIRED, and MAY when
 highlighted (through style sheets, and in uppercase in the source) are
-used in accordance with [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt). 
+used in accordance with [RFC 2119](http://www.ietf.org/rfc/rfc2119.txt).
 The term NOT REQUIRED (not defined in RFC 2119) indicates exemption.
 
 ## Protocol Versions

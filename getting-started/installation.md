@@ -5,7 +5,7 @@
 
 An EPICS installation typically consists of multiple software modules.
 
-EPICS Base will always be one of them. 
+EPICS Base will always be one of them.
 Base and additional modules that provide libraries or tools
 are often referred to as _Support Modules_,
 while the modules that produce your control system

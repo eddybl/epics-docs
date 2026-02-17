@@ -172,7 +172,7 @@ beacon per minute) to report serverStatus.
 
 Existing PVA server implementations send one beacon every 15 seconds
 for the first 5 minutes after startup. After running for 5 minutes, they
-lower the beacon period to once every 180 seconds (3 minutes). 
+lower the beacon period to once every 180 seconds (3 minutes).
 
 Beacons SHOULD not be used to report connection-valid status.
 
@@ -257,7 +257,7 @@ clients should attempt to minimize latency if they have the capacity to
 do so. If the Throughput priority bit is set, this indicates a client
 similarly should attempt to maximize throughput. How this is achieved is
 implementation defined. The Compression bit enables compression for the
-connection _(Which compression? From which support layer?)_. 
+connection _(Which compression? From which support layer?)_.
 A matter for a future version of the specification should
 be whether a streaming mode algorithm should be specified.
 
@@ -362,9 +362,9 @@ search request (0x03) message.
 
 ```c
 struct searchResponse {
-    byte[12] guid;          
+    byte[12] guid;
     int searchSequenceID;
-    byte[16] serverAddress; // e.g. IPv6 address in case of IP based transport 
+    byte[16] serverAddress; // e.g. IPv6 address in case of IP based transport
     short serverPort;       // e.g. socket port in case of IP based transport
     string protocol;
     boolean found;
@@ -395,7 +395,7 @@ If the serverAddressIPv6 is non-zero, it specifies the TCP connection informatio
 that the client should use for further communication, i.e., to create a channel
 and perform get/put/.. operations.
 If the address is all zero, and the exchange is via UDP,
-the client should use the address from which the UDP reply was received as the server address. 
+the client should use the address from which the UDP reply was received as the server address.
 If the address is all zero, and the exchange is via TCP,
 the client should use that same TCP connection for further communication.
 
@@ -1468,7 +1468,7 @@ described above.
 The 7-th bit of a header flags field indicates the server's selected
 byte order for the connection on which this message was received. Client
 MUST encode all the messages sent to the server via this connection using this byte
-order.  
+order.
 The client's decoding byte order for messages received from the server depends on the payload size field value as
 follows:
 

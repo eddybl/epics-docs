@@ -27,7 +27,7 @@ We are now starting with our first board MVME6100 (aka beatnik). Unfortunately, 
 >On Mac: Make sure that the installation path used is on the APFS (case-sensitive) file system.
 
 
-``` 
+```
 #!/bin/bash
 #RTEMS development
 export RTEMS_VERSION=6
@@ -117,7 +117,7 @@ drwxr-xr-x 12 rtems rtems 4096 Feb 16 16:13 lib
 ```
 Now we have to select the desired network stack.
 
-* Legacy network stack, supports old network drivers, old cards 
+* Legacy network stack, supports old network drivers, old cards
 * LibBSD stack, requires Nexus drivers for network interfaces, prerequisite for e.g. NFSv4
 
 1. MVME6100 with legacy stack:
@@ -162,7 +162,7 @@ git submodule update
 >
 > export PATH=${RTEMS_ROOT}/bin:${PATH}
 > echo ${PATH}
-> 
+>
 > git clone https://gitlab.rtems.org/rtems/pkg/rtems-libbsd.git
 > cd rtems-libbsd
 > git checkout 6-freebsd-12
@@ -269,13 +269,3 @@ total 420172
 -rwxr-xr-x 1 rtems rtems 60756264 Feb 16 18:27 softIocPVA
 -rwxr-xr-x 1 rtems rtems  4588816 Feb 16 18:27 softIocPVA.boot
 ```
-
-
-
-
-
-
-
-
-
-

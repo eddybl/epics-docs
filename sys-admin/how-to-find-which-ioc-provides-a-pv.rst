@@ -97,7 +97,7 @@ And to complete the circle, and get access to the IOC console, we find which TCP
     tcp        0      0 127.0.0.1:4057          0.0.0.0:*               LISTEN      4566/procServ
     $ telnet localhost 4057
     epics> dbpr LN-RF{AMP:1}Amp-Sts
-    ASG:                DESC: Ampl.500 MHz E-Source             DISA: 0             
-    DISP: 0             DISV: 1             NAME: LN-RF{AMP:1}Amp-Sts               
-    RVAL: 16            SEVR: NO_ALARM      STAT: NO_ALARM      SVAL: 0             
+    ASG:                DESC: Ampl.500 MHz E-Source             DISA: 0
+    DISP: 0             DISV: 1             NAME: LN-RF{AMP:1}Amp-Sts
+    RVAL: 16            SEVR: NO_ALARM      STAT: NO_ALARM      SVAL: 0
     TPRO: 0             VAL: 1

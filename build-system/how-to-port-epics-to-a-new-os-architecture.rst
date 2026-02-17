@@ -4,7 +4,7 @@ How To Port EPICS to a new OS/Architecture
 .. tags:: user
 
 
-This isn’t a detailed list of tasks, but is intended to show the main stages needed to add a new build architecture to EPICS. 
+This isn’t a detailed list of tasks, but is intended to show the main stages needed to add a new build architecture to EPICS.
 If you make use of this and find there are hints you’d like to suggest, or steps missing please add them.
 
 * Download a tarfile for the latest release of EPICS Base, or the snapshot from the R3.14 branch (not the trunk), and unpack it.

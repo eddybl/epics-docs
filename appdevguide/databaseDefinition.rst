@@ -651,7 +651,7 @@ The following is the definition of the event record type:
 ::
 
    recordtype(event) {
-       include "dbCommon.dbd" 
+       include "dbCommon.dbd"
        field(VAL,DBF_STRING) {
            prompt("Event Name To Post")
            promptgroup("40 - Input")
@@ -1552,7 +1552,7 @@ analog output record contains:
        choice(aoOIF_Incremental,"Incremental")
    }
    recordtype(ao) {
-       include "dbCommon.dbd" 
+       include "dbCommon.dbd"
        field(VAL,DBF_DOUBLE) {
            prompt("Desired Output")
            promptgroup("50 - Output")

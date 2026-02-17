@@ -45,7 +45,7 @@ Install the compiler
 Download the Visual Studio Installer and install (the community edition is free). Make sure you enable the Programming Languages / C++ Development options.
 
 In VS 2019, you also have the option to additionally install the Visual C++ 2017 compilers, if that is interesting for you.
-    
+
 Download and build EPICS Base
 -----------------------------
 
@@ -54,7 +54,7 @@ Download and build EPICS Base
 3. Unpack it into a work directory.
 4. Open a Windows command prompt and change into the directory you unpacked EPICS Base into. It is best to use a ``cmd`` command prompt for this - running ``bat`` files by e.g. ``&`` from powershell prompt does not preserve environment variables set in the bat file, such as by ``vcvarsall.bat``.
    If you wish to use powershell, you need to launch powershell from a cmd window after you have run the relevant bat files to set the environment.
-   See https://stackoverflow.com/questions/49027851/setting-environment-variables-with-batch-file-lauched-by-powershell-script 
+   See https://stackoverflow.com/questions/49027851/setting-environment-variables-with-batch-file-lauched-by-powershell-script
 
    **Note:** The complete path of the current directory mustn't contain any spaces or parentheses. If your working directory path does, you can do another cd into the same directory, replacing every path component containing spaces or parentheses with its Windows short path (that can be displayed with ``dir /x``).
 5. Set the EPICS host architecture EPICS_HOST_ARCH (windows-x64 for 64bit builds, win32-x86 for 32bit builds).
@@ -135,7 +135,7 @@ We will use the Windows command prompt for building the IOC. Open the command pr
 
     >mkdir testioc
     >cd testioc
-    
+
 From that ``testioc`` folder run the following::
 
     >makeBaseApp.pl -t ioc test
@@ -146,7 +146,7 @@ From that ``testioc`` folder run the following::
     What application should the IOC(s) boot?
     The default uses the IOC's name, even if not listed above.
     Application name?
-    
+
 Accept the default name and press enter. That should generate a skeleton for your ``testioc``.
 
 You can find the full details of the application structure in the "Application Developer's Guide", chapter `Example IOC Application <https://epics.anl.gov/base/R3-16/2-docs/AppDevGuide/AppDevGuide.html>`_.
@@ -158,7 +158,7 @@ You can find the full details of the application structure in the "Application D
     iocBoot
     Makefile
     testApp
-    
+
 Now create a ``db`` file which describes PVs for your ``IOC``. Go to ``testApp\Db`` and create ``test.db`` file with following record details::
 
     record(ai, "test:pv1")
@@ -176,7 +176,7 @@ Now create a ``db`` file which describes PVs for your ``IOC``. Go to ``testApp\D
         field(INPB, "test:pv2")
         field(CALC, "A + B")
     }
-    
+
 Open ``Makefile`` and navigate to
 
 ::
@@ -211,7 +211,7 @@ Change into the testioc folder and run ``make`` (or ``gmake`` when using the mak
     >make
 
 This should build the executable and create all files for the test IOC::
-    
+
     >dir /b
     bin
     configure
@@ -226,12 +226,12 @@ At this point, you can run the IOC from either an MSYS2 Bash shell or from a Win
 
 In the Windows command prompt::
 
-    >cd %HOMEPATH%\testioc\iocBoot\ioctest    
+    >cd %HOMEPATH%\testioc\iocBoot\ioctest
     >..\..\bin\windows-x64\test st.cmd
 
 Or - if you have an installation - in the MSYS2 shell::
 
-    $ cd ~/testioc/iocBoot/ioctest    
+    $ cd ~/testioc/iocBoot/ioctest
     $ ../../bin/windows-x64/test st.cmd
 
 

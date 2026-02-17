@@ -16,7 +16,7 @@ Prepare your system
 
 You need ``make``, ``c++`` and ``libreadline`` to compile from source. On macOS these
 dependencies can be installed by using e.g. ``homebrew``. On Linux you
-can use ``apt-get install``.  The :doc:`linux-packages` document lists all 
+can use ``apt-get install``.  The :doc:`linux-packages` document lists all
 of the packages required to build EPICS base, the sequencer, synApps modules, and areaDetector.
 
 For example on Ubuntu, Debian, and other Debian-based Linux:
@@ -42,7 +42,7 @@ Choose the release that you want and download:
     cd base-7.0.8.1
     make
 
-After compiling you should put the path into ``$HOME/.profile`` or into ``$HOME/.bashrc`` 
+After compiling you should put the path into ``$HOME/.profile`` or into ``$HOME/.bashrc``
 by adding the following to either one of those files:
 
 ::
@@ -51,14 +51,14 @@ by adding the following to either one of those files:
     export EPICS_HOST_ARCH=$(${EPICS_BASE}/startup/EpicsHostArch)
     export PATH=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:${PATH}
 
-EpicsHostArch is a program provided by EPICS that returns the architecture 
-of your system. 
+EpicsHostArch is a program provided by EPICS that returns the architecture
+of your system.
 Thus the code above should be fine for every architecture.
 
 Test EPICS
 ----------
 Now log out and log in again, so that your new path is set correctly.
-Alternatively, you can execute the three lines above beginning with export 
+Alternatively, you can execute the three lines above beginning with export
 directly from the terminal.
 
 Run ``softIoc`` and, if everything is ok, you should see an EPICS prompt.
@@ -118,7 +118,7 @@ caget and caput. You will see something like
     your prompt> caput temperature:water 24
     Old : temperature:water              21
     New : temperature:water              24
-    your prompt> caget temperature:water 
+    your prompt> caget temperature:water
     temperature:water              24
      ... etc.
 
@@ -182,29 +182,29 @@ Create a demo/test ioc to test ca and pva
     chmod u+x st.cmd
     ioctestIoc> ./st.cmd
     #!../../bin/darwin-x86/testIoc
-    < envPaths 
-    epicsEnvSet("IOC","ioctestIoc") 
-    epicsEnvSet("TOP","/Users/maradona/EPICS/TEST/testIoc") 
-    epicsEnvSet("EPICS_BASE","/Users/maradona/EPICS/epics-base") 
-    cd "/Users/maradona/EPICS/TEST/testIoc" 
-    ## Register all support components 
-    dbLoadDatabase "dbd/testIoc.dbd" 
-    testIoc_registerRecordDeviceDriver pdbbase 
-    ## Load record instances dbLoadTemplate "db/user.substitutions" 
-    dbLoadRecords "db/testIocVersion.db", "user=junkes" 
-    dbLoadRecords "db/dbSubExample.db", "user=junkes" 
-    #var mySubDebug 1 
-    #traceIocInit 
-    cd "/Users/maradona/EPICS/TEST/testIoc/iocBoot/ioctestIoc" 
-    iocInit 
-    Starting iocInit 
-    ############################################################################ 
-    ## EPICS R7.0.1.2-DEV 
-    ## EPICS Base built Mar 8 2018 
-    ############################################################################ 
-    iocRun: All initialization complete 
-    2018-03-09T13:07:02.475 Using dynamically assigned TCP port 52908. 
-    ## Start any sequence programs 
+    < envPaths
+    epicsEnvSet("IOC","ioctestIoc")
+    epicsEnvSet("TOP","/Users/maradona/EPICS/TEST/testIoc")
+    epicsEnvSet("EPICS_BASE","/Users/maradona/EPICS/epics-base")
+    cd "/Users/maradona/EPICS/TEST/testIoc"
+    ## Register all support components
+    dbLoadDatabase "dbd/testIoc.dbd"
+    testIoc_registerRecordDeviceDriver pdbbase
+    ## Load record instances dbLoadTemplate "db/user.substitutions"
+    dbLoadRecords "db/testIocVersion.db", "user=junkes"
+    dbLoadRecords "db/dbSubExample.db", "user=junkes"
+    #var mySubDebug 1
+    #traceIocInit
+    cd "/Users/maradona/EPICS/TEST/testIoc/iocBoot/ioctestIoc"
+    iocInit
+    Starting iocInit
+    ############################################################################
+    ## EPICS R7.0.1.2-DEV
+    ## EPICS Base built Mar 8 2018
+    ############################################################################
+    iocRun: All initialization complete
+    2018-03-09T13:07:02.475 Using dynamically assigned TCP port 52908.
+    ## Start any sequence programs
     #seq sncExample, "user=maradona"
     epics> dbl
     maradona:circle:tick
@@ -314,6 +314,6 @@ For 64 bit installations, the path to the library may be different:
     PCRE_INCLUDE=/usr/include/pcre
     PCRE_LIB=/usr/lib64
 
-Again, if you're not interested in support for reular expression matching at this time then you can comment out any lines referring to PCRE in the ``configure/RELEASE`` file using a ``#``. It can always be added later. 
+Again, if you're not interested in support for reular expression matching at this time then you can comment out any lines referring to PCRE in the ``configure/RELEASE`` file using a ``#``. It can always be added later.
 
 Finally run ``make`` (we are in the directory ``...EPICS/support/StreamDevice``)

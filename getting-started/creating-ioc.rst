@@ -145,7 +145,7 @@ these files must be included in the compilation. So
     DB += MDO.db
     DB += MDO.proto
     # If .db template is not named *.template add
-    # _TEMPLATE = 
+    # _TEMPLATE =
     include $(TOP)/configure/RULES
     #----------------------------------------
     # ADD EXTRA GNUMAKE RULES BELOW HERE

@@ -14,7 +14,7 @@ Thus, before discussing locking, scanning, and processing, record links are desc
 
 ## Record Links
 
-A database record may contain links to other records. Links can carry data, 
+A database record may contain links to other records. Links can carry data,
 including some metadata items like timestamps and alarm values. Links can also propagate record processing.
 Each link is one of the following types:
 
@@ -39,7 +39,7 @@ INLINKs and OUTLINKs can be one of the following:
 
  - hardware link
 
-   Not discussed in this chapter. 
+   Not discussed in this chapter.
 
  - FWDLINK
 
@@ -330,7 +330,7 @@ This brief example demonstrates that database links need more discussion.
 
 The processing order follows the following rules:
 
- 1. Forward links are processed in order from left to right and top to bottom. For example the following records are 
+ 1. Forward links are processed in order from left to right and top to bottom. For example the following records are
 processed in the order `FLNK1`, `FLNK2`, `FLNK3`, `FLNK4` .
 
 
@@ -402,7 +402,7 @@ Thus a better solution would be:
 
 #### Process Passive: Field attribute
 
-All record type field definitions have an attribute called `process_passive` 
+All record type field definitions have an attribute called `process_passive`
 which is specified in the record definition file.
 It cannot be changed by an IOC application developer.
 This attribute is used only by `dbPutField`.
@@ -424,7 +424,7 @@ A synchronous record is a record that can be completely processed without waitin
 Thus the application developer never needs to consider the possibility of delays when he defines a set of related records.
 The only consideration is deciding when records should be processed and in what order a set of records should be processed.
 
-The following reviews the methods available to the application programmer for deciding 
+The following reviews the methods available to the application programmer for deciding
 when to process a record and for enforcing the order of record processing.
 
  1. A record can be scanned periodically (at one of several rates), via I/O event, or via Event.
@@ -446,7 +446,7 @@ when to process a record and for enforcing the order of record processing.
  7. The `process_passive` option for input and output links provides the application developer control over how a set of records are scanned.
 
  8. General link structures can be defined.
-    The application programmer should be wary, however, of defining arbitrary structures without carefully analyzing the processing order. 
+    The application programmer should be wary, however, of defining arbitrary structures without carefully analyzing the processing order.
 
 ## Guidelines for Asynchronous Records
 
@@ -533,7 +533,7 @@ A `dbGetLink` to a passive asynchronous record can get old data.
 
 ![lockScanProcess_37](images/lockScanProcess_37.png)
 
-If A is a passive asynchronous record then record B's `dbGetLink` request forces `dbProcess` 
+If A is a passive asynchronous record then record B's `dbGetLink` request forces `dbProcess`
 to be called for record A.
 `dbProcess` starts the processing but returns immediately, before the operation has finished.
 `dbGetLink` then reads the field value which is still old because processing will only be completed at a later time.
@@ -559,7 +559,7 @@ The first results from a `dbPutField`, which is a put coming from outside the da
 If this is directed to a record that already has `PACT` `TRUE` because the record started processing but asynchronous completion has not yet occurred, then a value is written to the record but nothing will be done with the value until the record is again processed.
 In order to make this happen `dbPutField` arranges to have the record reprocessed when the record finally completes processing.
 
-The second case results from `dbPutLink` finding a record already active because of a `dbPutField` 
+The second case results from `dbPutLink` finding a record already active because of a `dbPutField`
 directed to the record.
 In this case `dbPutLink` arranges to have the record reprocessed when the record finally completes processing.
 If the record is already active because it appears twice in a chain of record processing, it is not reprocessed because the chain of record processing would constitute an infinite loop.
@@ -672,7 +672,7 @@ However, a record may move between locksets.
 The relationship between record and lockset is established in the `lockRecord*` private structure which is the `LSET` field of each record.
 Each `lockRecord` structure includes an `epicsSpin*` to maintain its consistency.
 
-Records are associated with each other through links with the 
+Records are associated with each other through links with the
 `DBF_INLINK`, `DBF_OUTLINK`, and `DBF_FWDLINK` field types.
 These links are directional, from the record with the link field, to the field of the record it is targeted at.
 This is a directed graph of records (nodes) and links (edges).
@@ -755,4 +755,3 @@ If all records connected to `A` can be traversed without finding `B`, then the l
 All the records connected with `A` become one lockset, while the remaining records (including `B`) become the second.
 
 During IOC startup, the complete list of records is iterated (by `dbLockInitRecords`) and the required locksets are created and populated based on the links defined at the time.
-

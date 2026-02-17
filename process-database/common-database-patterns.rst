@@ -5,7 +5,7 @@ Common Database patterns
 
 Pull Alarm Status w/o Data
 --------------------------
-This is useful to bring alarm status in without affecting the value stored in a record. 
+This is useful to bring alarm status in without affecting the value stored in a record.
 In the following example the alarm status of **$(P):set** is fetched by **$(P):rbv** when it is processed, but the value is read from a different record.
 
 ::
@@ -20,7 +20,7 @@ In the following example the alarm status of **$(P):set** is fetched by **$(P):r
     record(bi, "$(P):rbv") {
         field(SDIS, "$(P):set NPP MS")
         field(DISV, "-1")
-        field(INP , "$(P):some:other:record")   
+        field(INP , "$(P):some:other:record")
     }
 
 Combined Setting and Readback
