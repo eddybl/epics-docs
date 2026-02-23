@@ -58,11 +58,6 @@ Each page is labeled by the intended audience.
 You may also directly use related links to see documents which match you the most.
 
 .. toctree::
-   :hidden:
-
-   EPICS Website <https://epics-controls.org>
-
-.. toctree::
    :maxdepth: 1
    :caption: Getting started
 
@@ -175,7 +170,8 @@ You may also directly use related links to see documents which match you the mos
 
 .. toctree::
    :maxdepth: 1
-   :caption: Training
+   :caption: Collaboration
 
-   Training Material <https://epics-controls.org/resources-and-support/documents/training/>
+   EPICS Website (External) <https://epics-controls.org>
+   EPICS Website - Training (External) <https://epics-controls.org/resources-and-support/documents/training/>
    community/how-to-run-an-epics-collaboration-meeting.rst
