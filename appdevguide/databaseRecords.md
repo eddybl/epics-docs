@@ -22,10 +22,51 @@ The general rules are the same as for the database definitions: {ref}`subsec:dat
 
 The exception is that multiple record instances of the same name can be defined.
 
+### Multiple Records of the Same Name
+
+Multiple definitions of records using the same **record_name** is generally allowed,
+as long as the record type is the same.
+The last value given for each **field** is the value used.
+The variable `dbRecordsOnceOnly` can be set to any non-zero value
+using the iocsh `var` command to make loading duplicate record definitions into the IOC illegal.
+Since 3.15.0.2, the record type has not to be repeated and instead `"*"` may be used.
+Since 7.0.8 using `"*"` allows to define mutliple record entries even if `dbRecordsOnceOnly!=0` is set.
+
+Examples:
+
+```
+record(ai, "myrec") {field(VAL, "5")}
+```
+
+```
+record(*, "myrec") {field(VAL, "10")}
+```
+
+`"myrec"` will therefore be initiliased with the value `10`.
+
+With setting `dbRecordsOnceOnly!=0`, the behaviour is:
+
+```
+record("*", "myrec") {field(VAL, "10")} # allowed
+record(ai, "myrec") {field(VAL, "10")} # error
+```
+
+Since 7.0.9 it is possible to use `"#"` to remove a previously defined record.
+Values for the fields are not required or advised,
+just use an empty record body `{}`.
+This is useful when a template defines records that are not wanted in some IOCs,
+without having to split or duplicate the original template.
+
+For example, this will remove the record named “unwanted”:
+
+```
+record("#", "unwanted") {}
+```
+
 ## Definitions
 
 **record_type**
-:   The record type, `"*"` or `"#"`
+:   The record type, `"*"` or `"#"` (see [Multiple Records of the Same Name](#multiple-records-of-the-same-name))
 
 **record_name**
 :   The record name. This must be composed out of only the following
