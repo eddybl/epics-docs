@@ -1,9 +1,12 @@
 # Database Definition
 
+```{tags} developer, advanced
+```
+
 ## Overview
 
-This chapter describes database definitions. The following definitions
-are described:
+This chapter describes database definitions.
+The following definitions are described:
 
 - Menu
 - Record Type
@@ -16,8 +19,8 @@ are described:
 - Record Instance
 
 Record Instances are fundamentally different from the other definitions.
-A file containing record instances should never contain any of the other
-definitions and vice-versa. Thus the following convention is followed:
+A file containing record instances should never contain any of the other definitions and vice-versa.
+Thus the following convention is followed:
 
 **Database Definition File**
 :   A file that contains any type of definition except record instances.
@@ -25,8 +28,7 @@ definitions and vice-versa. Thus the following convention is followed:
 **Record Instance File**
 :   A file that contains only record instance definitions.
 
-This chapter also describes utility programs which operate on these
-definitions.
+This chapter also describes utility programs which operate on these definitions.
 
 Any combination of definitions can appear in a single file or in a set
 of files related to each other via include statements.
@@ -124,8 +126,8 @@ alias
 
 ### Unquoted Strings
 
-In the summary section, some values are shown as quoted strings and some
-unquoted. The actual rule is that any string consisting of only the
+In the summary section, some values are shown as quoted strings and some unquoted.
+The actual rule is that any string consisting of only the
 following characters does not need to be quoted unless it contains one
 of the above keywords:
 
@@ -135,21 +137,24 @@ a-z A-Z 0-9 _ + - : . [ ] < > ;
 
 These are all legal characters for process variable names, although
 `.` is not allowed in a record name since it separates the record from
-the field name in a PV name. Thus in many cases quotes are not needed
-around record or field names in database files. Any string containing a
-macro does need to be quoted though.
+the field name in a PV name.
+Thus in many cases quotes are not needed
+around record or field names in database files.
+Any string containing a macro does need to be quoted though.
 
 ### Quoted Strings
 
 A quoted string can contain any ascii character except the quote
-character `"`. The quote character itself can given by using a
-back-slash (`\`) as an escape character. For example `"\""` is a
+character `"`.
+The quote character itself can given by using a
+back-slash (`\`) as an escape character.
+For example `"\""` is a
 quoted string containing a single double-quote character.
 
 ### Macro Substitution
 
-Macro substitutions are permitted inside quoted strings. Macro instances
-take the form:
+Macro substitutions are permitted inside quoted strings.
+Macro instances take the form:
 
 ```
 $(name)
@@ -163,7 +168,8 @@ ${name}
 
 There is no distinction between the use of parentheses or braces for
 delimiters, although the opening and closing characters must match for
-each macro instance. A macro name can be constructed using other macros,
+each macro instance.
+A macro name can be constructed using other macros,
 for example:
 
 ```
@@ -171,9 +177,11 @@ $(name_$(sel))
 ```
 
 A macro instance can also provide a default value that is used when no
-macro with the given name has been defined. The default value can itself
+macro with the given name has been defined.
+The default value can itself
 be defined in terms of other macros if desired, but may not contain any
-unescaped comma characters. The syntax for specifying a default value is
+unescaped comma characters.
+The syntax for specifying a default value is
 as follows:
 
 ```
@@ -183,7 +191,8 @@ $(name=default)
 Finally macro instances can also set the values of other macros which
 may (temporarily) override any existing values for those macros, but the
 new values are in scope only for the duration of the expansion of this
-particular macro instance. These definitions consist of `name=value`
+particular macro instance.
+These definitions consist of `name=value`
 sequences separated by commas, for example:
 
 ```
@@ -194,29 +203,31 @@ $(abcd=$(a)$(b)$(c)$(d),a=A,b=B,c=C,d=D)
 ### Escape Sequences
 
 The database routines translate standard C escape sequences inside
-database field value strings only. The standard C escape sequences
+database field value strings only.
+The standard C escape sequences
 supported are:
 
 ```
 \a \b \f \n \r \t \v \\ \' \" \ooo \xhh
 ```
 
-`\ooo` represents an octal number with 1, 2, or 3 digits. `\xhh`
-represents a hexadecimal number which may have any number of hex digits,
+`\ooo` represents an octal number with 1, 2, or 3 digits.
+`\xhh` represents a hexadecimal number which may have any number of hex digits,
 although only the last 2 will be represented in the character generated.
 
 ### Comments
 
-The comment symbol is "#". Whenever the comment symbol appears outside
+The comment symbol is "#".
+Whenever the comment symbol appears outside
 of a quoted string, it and all subsequent characters through the end of
 the line will be ignored.
 
 ### Define before referencing
 
-In general items cannot be referenced until they have been defined. For
-example a `device` definition cannot appear until the `recordtype`
-that it references has been defined or at least declared. Another
-example is that a record instance cannot appear until its associated
+In general items cannot be referenced until they have been defined.
+For example a `device` definition cannot appear until the `recordtype`
+that it references has been defined or at least declared.
+Another example is that a record instance cannot appear until its associated
 record type has been defined.
 
 One notable exception to this rule is that within a `recordtype`
@@ -226,12 +237,15 @@ directly by the record's `.dbd` file.
 ### Multiple Definitions
 
 If a menu, device, driver, or breakpoint table is defined more than
-once, then only the first instance will be used. Subsequent definitions
+once, then only the first instance will be used.
+Subsequent definitions
 may be compared to the first one and an error reported if they are
 different (the `dbdExpand.pl` program does this, the IOC currently
-does not). Record type definitions may only be loaded once; duplicates
+does not).
+Record type definitions may only be loaded once; duplicates
 will cause an error even if the later definitions are identical to the
-first. However a record type declaration may be used in place of the
+first.
+However a record type declaration may be used in place of the
 record type definition in `.dbd` files that define device support for
 that type.
 
@@ -264,11 +278,15 @@ system, i.e. directory names are separated by a colon `:` on Unix
 and a semicolon `;` on Windows.
 
 The `path` statement specifies the current search path for use when
-loading database and database definition files. The `addpath`
-statement appends directories to the current path. The path is used to
-locate the initial database file and included files. An empty path
+loading database and database definition files.
+The `addpath`
+statement appends directories to the current path.
+The path is used to
+locate the initial database file and included files.
+An empty path
 component at the beginning, middle, or end of a non-empty path string
-means search the current directory. For example:
+means search the current directory.
+For example:
 
 ```
 nnn::mmm    # Current directory is between nnn and mmm
@@ -277,7 +295,8 @@ nnn:        # Current directory is last
 ```
 
 Utilities which load database files (`dbExpand`, `dbLoadDatabase`,
-etc.) allow the user to specify an initial path. The `path` and
+etc.) allow the user to specify an initial path.
+The `path` and
 `addpath` commands can be used to change or extend that initial path.
 
 The initial path is determined as follows:
@@ -290,7 +309,8 @@ The initial path is determined as follows:
 3. the path is `.`, i.e. the current directory.
 
 The search path is not used at all if the filename being searched for
-contains a `/` or `\` character. The first instance of the specified
+contains a `/` or `\` character.
+The first instance of the specified
 filename is used.
 
 ### `include` – Include Statement
@@ -301,8 +321,8 @@ filename is used.
 include "filename"
 ```
 
-An include statement can appear at any place shown in the summary. It
-uses the search path as described above to locate the named file.
+An include statement can appear at any place shown in the summary.
+It uses the search path as described above to locate the named file.
 
 ### `menu` – Menu Definition
 
@@ -318,12 +338,14 @@ menu(name) {
 #### Definitions
 
 **name**
-:   Name for menu. This is the unique name identifying the menu. If
-    duplicate definitions are specified, only the first is used.
+:   Name for menu.
+    This is the unique name identifying the menu.
+    If duplicate definitions are specified, only the first is used.
 
 **choice_name**
 :   The name used in the `enum` generated by `dbdToMenuH.pl` or
-    `dbdToRecordtypeH.pl`. This must be a legal C/C++ identifier.
+    `dbdToRecordtypeH.pl`.
+    This must be a legal C/C++ identifier.
 
 **choice_string**
 :   The text string associated with this particular choice.
@@ -366,14 +388,15 @@ recordtype(record_type) {
 
 A record type statement that provides no field descriptions is a
 declaration, analagous to a function declaration (prototype) or forward
-definition in C. It allows the given record type name to be used in
+definition in C.
+It allows the given record type name to be used in
 circumstances where the full record type definition is not needed.
 
 #### Field Descriptor Rules
 
 **asl**
-:   Sets the Access Security Level for the field. Access Security is
-    discussed in the Access Security chapter.
+:   Sets the Access Security Level for the field.
+    Access Security is discussed in the Access Security chapter.
 
 **initial**
 :   Provides an initial (default) value for the field.
@@ -383,8 +406,8 @@ circumstances where the full record type definition is not needed.
     tools.
 
 **prompt**
-:   A prompt string for database configuration tools. Optional if
-    `promptgroup` is not defined.
+:   A prompt string for database configuration tools.
+    Optional if `promptgroup` is not defined.
 
 **special**
 :   If specified, special processing is required for this field at run
@@ -408,26 +431,26 @@ circumstances where the full record type definition is not needed.
 :   Must be specified for `DBF_NOACCESS` fields.
 
 **menu**
-:   Must be specified for `DBF_MENU` fields. It is the name of the
-    associated menu.
+:   Must be specified for `DBF_MENU` fields.
+    It is the name of the associated menu.
 
 **prop**
-:   Must be `YES` or `NO` (default). Indicates that the field holds
-    Channel Access meta-data.
+:   Must be `YES` or `NO` (default).
+    Indicates that the field holds Channel Access meta-data.
 
 #### Definitions
 
 **record_type**
-:   The unique name of the record type. Duplicate definitions are not
-    allowed and will be rejected.
+:   The unique name of the record type.
+    Duplicate definitions are not allowed and will be rejected.
 
 **field_name**
-:   The field name, which must be a valid C and C++ identifier. When
-    include files are generated, the field name is converted to lower
-    case for use as the record structure member name. If the lower-case
-    version of the field name is a C or C++ keyword, the original name
-    will be used for the structure member name instead. Previous versions
-    of EPICS required the field name be a maximum of four all upper-case
+:   The field name, which must be a valid C and C++ identifier.
+    When include files are generated, the field name is converted to lower
+    case for use as the record structure member name.
+    If the lower-case version of the field name is a C or C++ keyword,
+    the original name will be used for the structure member name instead.
+    Previous versions of EPICS required the field name be a maximum of four all upper-case
     characters, but these restrictions no longer apply.
 
 **field_type**
@@ -456,10 +479,12 @@ circumstances where the full record type definition is not needed.
 
     -  `ASL1` (default value)
 
-    Fields which operators normally change are assigned `ASL0`. Other
-    fields are assigned `ASL1`. For example, the `VAL` field of an
+    Fields which operators normally change are assigned `ASL0`.
+    Other fields are assigned `ASL1`.
+    For example, the `VAL` field of an
     analog output record is assigned `ASL0` and all other fields
-    `ASL1`. This is because only the `VAL` field should be modified
+    `ASL1`.
+    This is because only the `VAL` field should be modified
     during normal operations.
 
 **init_value**
@@ -475,9 +500,11 @@ circumstances where the full record type definition is not needed.
     A `promptgroup` should only be set for fields that can sensibly be
     configured in a record instance file.
 
-    The set of group names is no longer fixed. In earlier versions of
+    The set of group names is no longer fixed.
+    In earlier versions of
     Base the predefined set of choices beginning `GUI_` were the only
-    group names permitted. Now the group name strings found in the
+    group names permitted.
+    Now the group name strings found in the
     database definition file are collected and stored in a global list.
     The strings given for group names must match exactly for fields to be
     grouped together.
@@ -494,15 +521,20 @@ circumstances where the full record type definition is not needed.
        be displayed by the tool as a title for the group.
 
     -  In many-of-the-same-kind cases (e.g. 21 similar inputs) fields are
-       distributed over multiple groups. Once-only fields appear in
-       groups numbered in multiples of 5 or 10. The groups with the
-       multiple instances follow in +1 increments. This allows more
+       distributed over multiple groups.
+       Once-only fields appear in
+       groups numbered in multiples of 5 or 10.
+       The groups with the
+       multiple instances follow in +1 increments.
+       This allows more
        sophisticated treatment, e.g. showing the first group open and the
        other groups collapsed.
 
-    Record types may define their own group names. However, to improve
+    Record types may define their own group names.
+    However, to improve
     consistency, records should use the following names from Base where
-    possible. (This set also demonstrates that the group names used in
+    possible.
+    (This set also demonstrates that the group names used in
     different record types may share the same number.)
 
     -  General fields that are common to all or many record types
@@ -527,20 +559,21 @@ circumstances where the full record type definition is not needed.
 
     NOTE: Older versions of Base contained a header file `guigroup.h`
     defining a fixed set of group names and their matching index numbers.
-    That header file has been removed. The static database access library
+    That header file has been removed.
+    The static database access library
     now provides functions to convert between group index keys and the
-    associated group name strings. See the "Get Field Prompt" section for
-    details.
+    associated group name strings.
+    See the "Get Field Prompt" section for details.
 
 **special_value**
 :   Must be one of the following:
 
-    -  `SPC_MOD` – Notify record support when modified. The record
-       support `special` routine will be called whenever the field is
+    -  `SPC_MOD` – Notify record support when modified.
+       The record support `special` routine will be called whenever the field is
        modified by the database access routines.
 
-    -  `SPC_NOMOD` – No external modifications allowed. This value
-       disables external writes to the field, so it can only be set by
+    -  `SPC_NOMOD` – No external modifications allowed.
+       This value disables external writes to the field, so it can only be set by
        the record or device support module.
 
     -  `SPC_DBADDR` – Use this if the record support's `cvt_dbaddr`
@@ -548,8 +581,8 @@ circumstances where the full record type definition is not needed.
        outside of the record or device support makes a connection to the
        field.
 
-       The following values are for database common fields. They must
-       *not* be used for record specific fields:
+       The following values are for database common fields.
+       They must *not* be used for record specific fields:
 
     -  `SPC_SCAN` – Scan related field.
 
@@ -569,7 +602,8 @@ circumstances where the full record type definition is not needed.
 
 **pp_value**
 :   Should a passive record be processed when Channel Access writes to
-    this field? The allowed values are:
+    this field?
+    The allowed values are:
 
     -  `FALSE` (default)
 
@@ -579,7 +613,8 @@ circumstances where the full record type definition is not needed.
 :   An interest level for the `dbpr` command.
 
 **base**
-:   For integer type fields, the default base. The legal values are:
+:   For integer type fields, the default base.
+    The legal values are:
 
     -  `DECIMAL` (Default)
 
@@ -590,7 +625,8 @@ circumstances where the full record type definition is not needed.
 
 **extra_info**
 :   For `DBF_NOACCESS` fields, this is the C language definition for
-    the field. The definition must end with the fieldname in lower case.
+    the field.
+    The definition must end with the fieldname in lower case.
 
 **%C_declaration**
 :   A percent sign `%` inside the record body introduces a line of code
@@ -660,12 +696,15 @@ device(record_type, link_type, dset_name, "choice_string")
 #### Definitions
 
 **record_type**
-:   Record type. The combination of `record_type` and `choice_string`
-    must be unique. If the same combination appears more than once, only
+:   Record type.
+    The combination of `record_type` and `choice_string`
+    must be unique.
+    If the same combination appears more than once, only
     the first definition is used.
 
 **link_type**
-:   Link type. This must be one of the following:
+:   Link type.
+    This must be one of the following:
 
     -  `CONSTANT`
 
@@ -693,8 +732,8 @@ device(record_type, link_type, dset_name, "choice_string")
 :   The name of the device support entry table for this device support.
 
 **choice_string**
-:   The `DTYP` choice string for this device support. A
-    `choice_string` value may be reused for different record types, but
+:   The `DTYP` choice string for this device support.
+    A `choice_string` value may be reused for different record types, but
     must be unique for each specific record type.
 
 #### Examples
@@ -766,12 +805,15 @@ variable(variable_name[, type])
     with an `epicsExportAddress` declaration.
 
 **type**
-:   The C variable's type. If not present, `int` is assumed. Currently
-    only `int` and `double` variables are supported.
+:   The C variable's type.
+    If not present, `int` is assumed.
+    Currently only `int` and `double` variables are supported.
 
 This registers a diagnostic/configuration variable for device or driver
-support or a subroutine record subroutine. This variable can be read and
-set with the iocsh `var` command. The example application described in
+support or a subroutine record subroutine.
+    This variable can be read and
+set with the iocsh `var` command.
+    The example application described in
 the "Example IOC Application" section shows how to register a debug
 variable for use in a subroutine record.
 
@@ -808,7 +850,8 @@ function(function_name)
 
 This registers a function so that it can be found in the function
 registry for use by record types such as sub or aSub which refer to the
-function by name. The example application described in the "Example IOC
+function by name.
+    The example application described in the "Example IOC
 Application" section shows how to register functions for a subroutine
 record.
 
@@ -846,8 +889,8 @@ breaktable(name) {
 #### Definitions
 
 **name**
-:   Name, which must be alpha-numeric, of the breakpoint table. If
-    duplicates are specified the first is used.
+:   Name, which must be alpha-numeric, of the breakpoint table.
+    If duplicates are specified the first is used.
 
 **raw_value**
 :   The raw value, i.e. the actual ADC value associated with the
@@ -923,10 +966,13 @@ alias(record_name, alias_name)
 
 **field_value**
 :   A value for the named field, appropriate for its particular field
-    type. When given inside double quotes the field value string may
+    type.
+    When given inside double quotes the field value string may
     contain escaped characters which will be translated appropriately
-    when loading the database. See section [Escape Sequences](#subsec-escape-sequences)
-    for the list of escaped characters supported. Permitted values for the various field types
+    when loading the database.
+    See section [Escape Sequences](#subsec-escape-sequences)
+    for the list of escaped characters supported.
+    Permitted values for the various field types
     are as follows:
 
     -  **`DBF_STRING`**
@@ -934,10 +980,10 @@ alias(record_name, alias_name)
        truncated.
 
     -  **`DBF_CHAR`, `DBF_UCHAR`, `DBF_SHORT`, `DBF_USHORT`, `DBF_LONG`, `DBF_ULONG`**
-       A string that represents a valid integer. The standard C
-       conventions are applied, i.e. a leading 0 means the value is
-       given in octal and a leading 0x means that value is given in
-       hex.
+       A string that represents a valid integer.
+       The standard C conventions are applied, i.e. a leading 0 means
+       the value is given in octal and a leading 0x means that value
+       is given in hex.
 
     -  **`DBF_FLOAT`, `DBF_DOUBLE`**
        The string must represent a valid floating point number.
@@ -956,7 +1002,8 @@ alias(record_name, alias_name)
        -  If the field name is `INP` or `OUT` then this field is
           associated with `DTYP`, and the permitted values are
           determined by the link type of the device support selected by
-          the current `DTYP` choice string. Other `DBF_INLINK` and
+          the current `DTYP` choice string.
+          Other `DBF_INLINK` and
           `DBF_OUTLINK` fields must be either `CONSTANT` or
           `PV_LINK`s.
 
@@ -1001,7 +1048,8 @@ alias(record_name, alias_name)
 
              `CP` and `CPP` are valid only for `DBF_INLINK` fields.
 
-             `DBF_FWDLINK` fields can use `PP` or `CA`. If a
+             `DBF_FWDLINK` fields can use `PP` or `CA`.
+             If a
              `DBF_FWDLINK` is a channel access link it must reference
              the target record's `PROC` field.
 
@@ -1021,7 +1069,8 @@ alias(record_name, alias_name)
           `card` – the card number of associated hardware module
           `signal` – signal on card
           `parm` – An arbitrary character string of up to 31
-          characters. This field is optional and is device specific.
+          characters.
+          This field is optional and is device specific.
 
        -  **`CAMAC_IO`**
           `#Bbranch Ccrate Nstation Asubaddress Ffunction @parm`
@@ -1036,7 +1085,8 @@ alias(record_name, alias_name)
           `#Llink Aadapter Ccard Ssignal @parm`
 
           `link` – Scanner, i.e. vme scanner number
-          `adapter` – Adapter. Allen Bradley also calls this rack
+          `adapter` – Adapter.
+          Allen Bradley also calls this rack
           `card` – Card within Allen Bradley Chassis
           `signal` – signal on card
           `parm` – optional device-specific character string (27 char
@@ -1086,11 +1136,13 @@ alias(record_name, alias_name)
           `parm` – device specific character string(25 char max)
 
 **info_name**
-:   The name of an Information Item related to this record. See section
-    on Record Information Items below for more on Information Items.
+:   The name of an Information Item related to this record.
+    See section on Record Information Items below for more on
+    Information Items.
 
 **info_value**
-:   Any ASCII string. IOC applications using this information item may
+:   Any ASCII string.
+    IOC applications using this information item may
     place additional restrictions on the contents of the string.
 
 #### Examples
@@ -1134,26 +1186,35 @@ record(bi,STS_AbDiA0C0S0) {
 
 Information items provide a way to attach named string values to
 individual record instances that are loaded at the same time as the
-record definition. They can be attached to any record without having to
+record definition.
+They can be attached to any record without having to
 modify the record type, and can be retrieved by programs running on the
-IOC (they are not visible via Channel Access at all). Each item attached
+IOC (they are not visible via Channel Access at all).
+Each item attached
 to a single record must have a unique name by which it is addressed, and
 database access provides routines to allow a record's info items to be
-scanned, searched for, retrieved and set. At runtime a `void*` pointer
+scanned, searched for, retrieved and set.
+At runtime a `void*` pointer
 can also be associated with each item, although only the string value
 can be initialized from the record definition when the database is
 loaded.
 
 ## Record Attributes
 
-Each record type can have any number of record attributes. Each
+Each record type can have any number of record attributes.
+Each
 attribute is a psuedo field that can be accessed via database and
-channel access. Each attribute has a name that acts like a field name
-but returns the same value for all instances of the record type. Two
+channel access.
+Each attribute has a name that acts like a field name
+but returns the same value for all instances of the record type.
+Two
 attributes are generated automatically for each record type: `RTYP`
-and `VERS`. The value for `RTYP` is the record type name. The
+and `VERS`.
+The value for `RTYP` is the record type name.
+The
 default value for `VERS` is "none specified", which can be changed by
-record support. Record support can call the following routine to create
+record support.
+Record support can call the following routine to create
 new attributes or change existing attributes:
 
 ```c
@@ -1171,7 +1232,8 @@ The arguments are:
 ## Breakpoint Tables – Discussion
 
 The menu `menuConvert` is used for field `LINR` of the `ai` and
-`ao` records. These records allow raw data to be converted to/from
+`ao` records.
+These records allow raw data to be converted to/from
 engineering units via one of the following:
 
 1. No Conversion.
@@ -1182,14 +1244,17 @@ engineering units via one of the following:
 
 4. Breakpoint table.
 
-Other record types can also use this feature. The first choice specifies
+Other record types can also use this feature.
+The first choice specifies
 no conversion; the second and third are both linear conversions, the
 difference being that for Slope conversion the user specifies the
 conversion slope and offset values directly, whereas for Linear
 conversions these are calculated by the device support from the
 requested Engineering Units range and the device support's knowledge of
-the hardware conversion range. The remaining choices are assumed to be
-the names of breakpoint tables. If a breakpoint table is chosen, the
+the hardware conversion range.
+The remaining choices are assumed to be
+the names of breakpoint tables.
+If a breakpoint table is chosen, the
 record support modules calls `cvtRawToEngBpt` or `cvtEngToRawBpt`.
 You can look at the `ai` and `ao` record support modules for
 details.
@@ -1205,10 +1270,13 @@ should be done:
    of EPICS version.
 
 It is only necessary to load a breakpoint file if a record instance
-actually chooses it. It should also be mentioned that the Allen Bradley
-IXE device support misuses the `LINR` field. If you use this module,
+actually chooses it.
+It should also be mentioned that the Allen Bradley
+IXE device support misuses the `LINR` field.
+If you use this module,
 it is very important that you do not change any of the EPICS supplied
-definitions in `menuConvert.dbd`. Just add your definitions at the
+definitions in `menuConvert.dbd`.
+Just add your definitions at the
 end.
 
 If a breakpoint table is chosen, then the corresponding breakpoint file
@@ -1216,9 +1284,11 @@ must be loaded into the IOC before `iocInit` is called.
 
 Normally, it is desirable to directly create the breakpoint tables.
 However, sometimes it is desirable to create a breakpoint table from a
-table of raw values representing equally spaced engineering units. A
+table of raw values representing equally spaced engineering units.
+A
 good example is the Thermocouple tables in the OMEGA Engineering, INC
-Temperature Measurement Handbook. A tool `makeBpt` is provided to
+Temperature Measurement Handbook.
+A tool `makeBpt` is provided to
 convert such data to a breakpoint table.
 
 The format for generating a breakpoint table from a data table of raw
@@ -1296,35 +1366,47 @@ type definitions, the program `dbdToRecordtypeH.pl` generates a C/C++
 header file for use by any code which needs those menus and record type.
 
 EPICS Base uses the following conventions for managing menu and
-recordtype definitions. Users generating local record types are
+recordtype definitions.
+Users generating local record types are
 encouraged to follow these.
 
 -  Each menu that is used by fields in database common (for example
    `menuScan`) or is of global use (for example `menuYesNo`) should
-   be defined in its own file. The name of the file is the same as the
-   menu name, with an extension of `.dbd`. The name of the generated
-   include file is the menu name, with an extension of `.h`. Thus
+   be defined in its own file.
+   The name of the file is the same as the
+   menu name, with an extension of `.dbd`.
+   The name of the generated
+   include file is the menu name, with an extension of `.h`.
+   Thus
    `menuScan` is defined in a file `menuScan.dbd` and the generated
    include file is named `menuScan.h`
 
--  Each record type is defined in its own file. This file should also
+-  Each record type is defined in its own file.
+   This file should also
    contain any menu definitions that are used only by that record type.
    Menus that are specific to one particular record type should use that
-   record type name as a prefix to the menu name. The name of the file
-   is the same as the record type, followed by `Record.dbd`. The name
+   record type name as a prefix to the menu name.
+   The name of the file
+   is the same as the record type, followed by `Record.dbd`.
+   The name
    of the generated include file is the same as the `.dbd` file but
-   with an extension of `.h`. Thus the record type `ao` is defined
+   with an extension of `.h`.
+   Thus the record type `ao` is defined
    in a file `aoRecord.dbd` and the generated include file is named
-   `aoRecord.h`. Since `aoRecord` has a private menu called
+   `aoRecord.h`.
+   Since `aoRecord` has a private menu called
    `aoOIF`, the `dbd` file and the generated include file will have
-   definitions for this menu. Thus for each record type, there are two
+   definitions for this menu.
+   Thus for each record type, there are two
    source files (`xxxRecord.dbd` and `xxxRecord.c`) and one
    generated file (`xxxRecord.h`).
 
 Note that developers don't normally execute the `dbdToMenuH.pl` or
-`dbdToRecordtypeH.pl` programs manually. If the proper naming
+`dbdToRecordtypeH.pl` programs manually.
+If the proper naming
 conventions are used, it is only necessary to add definitions to the
-appropriate `Makefile`. Consult the chapter on the EPICS Build
+appropriate `Makefile`.
+Consult the chapter on the EPICS Build
 Facility for details.
 
 ### dbdToMenuH.pl
@@ -1340,7 +1422,8 @@ file containing enumerated type definitions for the menus found in the
 input file.
 
 Multiple `-I` options can be provided to specify directories that must
-be searched when looking for included files. If no output filename is
+be searched when looking for included files.
+If no output filename is
 specified with the `-o menu.h` option or as a final command-line
 parameter, then the output filename will be constructed from the input
 filename, replacing `.dbd` with `.h`.
@@ -1391,12 +1474,14 @@ dbdTorecordtypeH.pl [-D] [-I dir] [-o xRecord.h] xRecord.dbd [xRecord.h]
 
 It reads in the input file `xRecord.dhd` and generates a C/C++ header
 file which defines the in-memory structure of the given record type and
-provides other associated information for the compiler. If the input
+provides other associated information for the compiler.
+If the input
 file contains any menu definitions, they will also be converted into
 enumerated type definitions in the output file.
 
 Multiple `-I` options can be provided to specify directories that must
-be searched when looking for included files. If no output filename is
+be searched when looking for included files.
+If no output filename is
 specified with the `-o xRecord.h` option or as a final command-line
 parameter then the output filename will be constructed from the input
 filename, replacing `.dbd` with `.h`.
@@ -1503,8 +1588,10 @@ Let's discuss the various parts of the file:
    and device support to access the fields in an analog output record.
 
 -  The next `enum` defines an index number for each field within the
-   record. This is useful for the record support routines that are
-   passed a pointer to a `DBADDR` structure. They can have code like
+   record.
+   This is useful for the record support routines that are
+   passed a pointer to a `DBADDR` structure.
+   They can have code like
    the following:
 
 ```c
@@ -1521,9 +1608,11 @@ switch (dbGetFieldIndex(pdbAddr)) {
 ```
 
 The generated routine `aoRecordSizeOffset` is executed when the record
-type gets registered with an IOC. The routine is compiled with the
+type gets registered with an IOC.
+The routine is compiled with the
 record type code, and is marked static so it will not be visible outside
-of that file. The associate record support source code MUST include the
+of that file.
+The associate record support source code MUST include the
 generated header file only after defining the `GEN_SIZE_OFFSET` macro
 like this:
 
@@ -1533,8 +1622,8 @@ like this:
 #undef GEN_SIZE_OFFSET
 ```
 
-This convention ensures that the routine is defined exactly once. The
-`epicsExportRegistrar` statement ensures that the record registration
+This convention ensures that the routine is defined exactly once.
+The `epicsExportRegistrar` statement ensures that the record registration
 code can find and call the routine.
 
 ### dbdExpand.pl
@@ -1545,16 +1634,20 @@ dbdExpand.pl [-D] [-I dir] [-S mac=sub] [-o out.dbd] in.dbd ...
 
 This program reads and combines the database definition from all the
 input files, then writes a single output file containing all information
-from the input files. The output content differs from the input in that
+from the input files.
+The output content differs from the input in that
 comment lines are removed, and all defined macros and include files are
-expanded. Unlike the previous `dbExpand` program, this program does
+expanded.
+Unlike the previous `dbExpand` program, this program does
 not understand database instances and cannot be used with `.db` or
 `.vdb` files.
 
 Multiple `-I` options can be provided to specify directories that must
-be searched when looking for included files. Multiple `-S` options are
+be searched when looking for included files.
+Multiple `-S` options are
 allowed for macro substitution, or multiple macros can be specified
-within a single option. If no output filename is specified with the
+within a single option.
+If no output filename is specified with the
 `-o out.dbd` option then the output will go to stdout.
 
 The `-D` option causes the program to output Makefile dependency
@@ -1568,16 +1661,20 @@ dbLoadDatabase(char *dbdfile, char *path, char *substitutions)
 ```
 
 This IOC command loads a database file which may contain any of the
-Database Definitions described in this chapter. The `dbdfile` string
+Database Definitions described in this chapter.
+The `dbdfile` string
 may contain environment variable macros of the form `${MOTOR}` which
-will be expanded before the file is opened. Both the `path` and
+will be expanded before the file is opened.
+Both the `path` and
 `substitutions` parameters can be null or empty, and are usually
-ommitted. Note that `dbLoadDatabase` should only used to load Database
+ommitted.
+Note that `dbLoadDatabase` should only used to load Database
 Definition (`.dbd`) files, although it is currently possible to use it
 for loading Record Instance (`.db`) files as well.
 
 As each line of the file is read, the substitutions specified in
-`substitutions` are performed. Substitutions are specified as follows:
+`substitutions` are performed.
+Substitutions are specified as follows:
 
 ```
 "var1=sub1,var2=sub3,..."
@@ -1600,10 +1697,13 @@ dbLoadRecords(char* dbfile, char* substitutions)
 ```
 
 This IOC command loads a file containing record instances, record
-aliases and/or breakpoint tables. The `dbfile` string may contain
+aliases and/or breakpoint tables.
+The `dbfile` string may contain
 environment variable macros of the form `${MOTOR}` which will be
-expanded before the file is opened. The `substitutions` parameter can
-be null or empty, and is often ommitted. Note that `dbLoadRecords`
+expanded before the file is opened.
+The `substitutions` parameter can
+be null or empty, and is often ommitted.
+Note that `dbLoadRecords`
 should only used to load Record Instance (`.db`) files, although it is
 currently possible to use it for loading Database Definition (`.dbd`)
 files as well.
@@ -1646,11 +1746,13 @@ dbLoadTemplate(char *subfile, char *substitutions)
 
 This IOC command reads a template substitutions file which provides
 instructions for loading database instance files and gives values for
-the `$(xxx)` macros they may contain. This command performs those
+the `$(xxx)` macros they may contain.
+This command performs those
 substitutions while loading the database instances requested.
 
 The `subfile` parameter gives the name of the template substitution
-file to be used. The optional `substitutions` parameter may contain
+file to be used.
+The optional `substitutions` parameter may contain
 additional global macro values, which can be overridden by values given
 within the substitution file.
 
@@ -1709,7 +1811,8 @@ opened.
 #### Template File Formats
 
 Two different template formats are supported by the syntax rules given
-above. The format is either:
+above.
+The format is either:
 
 ```
 file name.template {
@@ -1731,7 +1834,8 @@ pattern { var1, var2, var3, ... }
 ```
 
 The first line (`file name.template`) specifies the record instance
-input file. The file name may appear inside double quotation marks;
+input file.
+The file name may appear inside double quotation marks;
 these are required if the name contains any characters that are not in
 the following set, or if it contains environment variable macros of the
 form `${VAR_NAME}` which must be expanded to generate the file name:
@@ -1741,16 +1845,19 @@ a-z A-Z 0-9 _ + - . / \ : ; [ ] < >
 ```
 
 Each set of definitions enclosed in `{}` is variable substitution for
-the input file. The input file has each set applied to it to produce one
-composite file with all the completed substitutions in it. Version 1
-should be obvious. In version 2, the variables are listed in the
+the input file.
+The input file has each set applied to it to produce one
+composite file with all the completed substitutions in it.
+Version 1 should be obvious.
+In version 2, the variables are listed in the
 `pattern{}` line, which must precede the braced substitution lines.
 The braced substitution lines contains sets which match up with the
 `pattern{}` line.
 
 #### Example
 
-Two simple template file examples are shown below. The examples specify
+Two simple template file examples are shown below.
+The examples specify
 the same substitutions to perform: `this=sub1` and `that=sub2` for a
 first set, and `this=sub3` and `that=sub4` for a second set.
 
