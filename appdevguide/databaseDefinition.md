@@ -1,8 +1,5 @@
 # Database Definition
 
-```{tags} developer, advanced
-```
-
 ## Overview
 
 This chapter describes database definitions.
@@ -17,7 +14,7 @@ The following definitions are described:
 - Function
 - Breakpoint Table
 
-Database definitions are organisied across mutliple database defintion files
+Database definitions are organisied across multiple database defintion files
 using the `.dbd` file extensions.
 
 This chapter also describes utility programs which operate on these definitions.

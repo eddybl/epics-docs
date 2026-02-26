@@ -29,8 +29,13 @@ as long as the record type is the same.
 The last value given for each **field** is the value used.
 The variable `dbRecordsOnceOnly` can be set to any non-zero value
 using the iocsh `var` command to make loading duplicate record definitions into the IOC illegal.
-Since 3.15.0.2, the record type has not to be repeated and instead `"*"` may be used.
-Since 7.0.8 using `"*"` allows to define mutliple record entries even if `dbRecordsOnceOnly!=0` is set.
+:::{versionadded} 3.15.0.2
+the record type has not to be repeated and instead `"*"` may be used.
+:::
+
+:::{versionadded} 7.0.8
+using `"*"` allows to define multiple record entries even if `dbRecordsOnceOnly!=0` is set.
+:::
 
 Examples:
 
@@ -39,7 +44,7 @@ record(ai, "myrec") {field(VAL, "5")}
 ```
 
 ```
-record(*, "myrec") {field(VAL, "10")}
+record("*", "myrec") {field(VAL, "10")}
 ```
 
 `"myrec"` will therefore be initiliased with the value `10`.
@@ -51,7 +56,9 @@ record("*", "myrec") {field(VAL, "10")} # allowed
 record(ai, "myrec") {field(VAL, "10")} # error
 ```
 
-Since 7.0.9 it is possible to use `"#"` to remove a previously defined record.
+:::{versionadded} 7.0.9
+it is possible to use `"#"` to remove a previously defined record.
+:::
 Values for the fields are not required or advised,
 just use an empty record body `{}`.
 This is useful when a template defines records that are not wanted in some IOCs,
